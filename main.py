@@ -15,30 +15,29 @@ for i in files_in_folder:
     f = open(folder_path + i, 'r')
     message = f.readlines()
     dictionary = {}
-    # iterate through each profile line by line
+
+# iterate through each profile line by line
     for oldlines in message:
-        # seperate to 2 per list via ":" character
-
+        # strip whitespace
         lines = oldlines.strip()
-        # print lines
-
         if lines != "":
-
+            # separate to 2 per list via ":" character
             data = lines.split(":")
             # adding a exception for books since the book info is on each separate lines
             if str(data[0]).lower() == "Books".lower():
+
+
+
+
                 break
             else:
-                # print data[1]
                 dictionary[data[0]] = data[1]
-
-                # print data
 
     list_of_dictionary_profiles_data.append(dictionary)
 #
 print list_of_dictionary_profiles_data
 
-# How to retireve: Eg: retireve all member names and gender
+# How to retrieve: Eg: retrieve all member names and gender
 
 for i in list_of_dictionary_profiles_data:
     print i["Name"] + " " + i["Gender"]
