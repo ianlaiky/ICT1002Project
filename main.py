@@ -8,7 +8,7 @@ for (directPath, dirNames, fileNames) in walk(folder_path):
     files_in_folder.extend(fileNames)
     print files_in_folder
 
-list_of_profiles_data = []
+list_of_dictionary_profiles_data = []
 
 # iterating every profile, storing info to list_of_profiles_data
 for i in files_in_folder:
@@ -20,7 +20,7 @@ for i in files_in_folder:
         # seperate to 2 per list via ":" character
 
         lines = oldlines.strip()
-        print lines
+        # print lines
 
         if lines != "":
 
@@ -30,10 +30,15 @@ for i in files_in_folder:
                 break
             else:
                 # print data[1]
-                # dictionary[data[0]] = data[1]
-                # if len(data) == 1:
-                print data
+                dictionary[data[0]] = data[1]
 
-#     list_of_profiles_data.append(dictionary[data])
+                # print data
+
+    list_of_dictionary_profiles_data.append(dictionary)
 #
-# print list_of_profiles_data
+print list_of_dictionary_profiles_data
+
+# How to retireve: Eg: retireve all member names and gender
+
+for i in list_of_dictionary_profiles_data:
+    print i["Name"] + " " + i["Gender"]
