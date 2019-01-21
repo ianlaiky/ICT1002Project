@@ -1,7 +1,6 @@
-
-# Folder path
 from os import walk
 
+# Folder path
 folder_path = "./profiles/"
 files_in_folder = []
 
