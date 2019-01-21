@@ -4,6 +4,36 @@ from os import walk
 folder_path = "./profiles/"
 files_in_folder = []
 
-for(directPath, dirNames, fileNames) in walk(folder_path):
+for (directPath, dirNames, fileNames) in walk(folder_path):
     files_in_folder.extend(fileNames)
     print files_in_folder
+
+list_of_profiles_data = []
+
+# iterating every profile, storing info to list_of_profiles_data
+for i in files_in_folder:
+    f = open(folder_path + i, 'r')
+    message = f.readlines()
+    dictionary = {}
+    # iterate through each profile line by line
+    for oldlines in message:
+        # seperate to 2 per list via ":" character
+
+        lines = oldlines.strip()
+        print lines
+
+        if lines != "":
+
+            data = lines.split(":")
+            # adding a exception for books since the book info is on each separate lines
+            if str(data[0]).lower() == "Books".lower():
+                break
+            else:
+                # print data[1]
+                # dictionary[data[0]] = data[1]
+                # if len(data) == 1:
+                print data
+
+#     list_of_profiles_data.append(dictionary[data])
+#
+# print list_of_profiles_data
