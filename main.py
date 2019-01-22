@@ -14,6 +14,7 @@ list_of_dictionary_profiles_data = []
 for i in files_in_folder:
     f = open(folder_path + i, 'r')
     message = f.readlines()
+    f.close()
     curated_message_for_books = list(message)
     dictionary = {}
 
@@ -50,7 +51,16 @@ for i in files_in_folder:
 
                 # poping list for books so to remove items that isnt books out
                 curated_message_for_books.pop(0)
-                dictionary[data[0]] = data[1]
+
+                if "," in data[1]:
+                    tempList = data[1].split(",")
+                    saveList = []
+                    for ix in tempList:
+                        if ix !="":
+                            saveList.append(ix.strip())
+                    dictionary[data[0]] = saveList
+                else:
+                    dictionary[data[0]] = data[1]
 
     list_of_dictionary_profiles_data.append(dictionary)
 
@@ -64,4 +74,6 @@ for i in list_of_dictionary_profiles_data:
     print "Name: " + i["Name"]
     print "Gender: " + i["Gender"]
     print i["Books"]
+    print "Likes"
+    print i["Likes"]
     print "\n\n"
