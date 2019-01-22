@@ -24,7 +24,15 @@ for i in files_in_folder:
         lines = oldlines.strip()
 
         if lines != "":
-            # separate to 2 per list via ":" character
+            if "Gender:" in lines:
+                lines = lines.replace("Male","M")
+                lines = lines.replace("Female","F")
+                lines = lines.replace("male","M")
+                lines = lines.replace("female","M")
+                lines = lines.replace("m","M")
+                lines = lines.replace("f","M")
+
+        # separate to 2 per list via ":" character
             data = lines.split(":")
 
             # adding a exception for books since the book info is on each separate lines
