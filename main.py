@@ -68,7 +68,7 @@ for i in files_in_folder:
                             saveList.append(ix.strip())
                     dictionary[data[0]] = saveList
                 else:
-                    dictionary[data[0]] = data[1]
+                    dictionary[data[0]] = data[1].strip()
 
     list_of_dictionary_profiles_data.append(dictionary)
 
@@ -81,7 +81,24 @@ for i in files_in_folder:
 for i in list_of_dictionary_profiles_data:
     print "Name: " + i["Name"]
     print "Gender: " + i["Gender"]
-    print i["Books"]
+    print "Country" + i["Country"]
+
+    print "Acceptable_country"
+    print i["Acceptable_country"]
+
+    print "Age"
+    print i["Age"]
+
+    print "Acceptable_age_range"
+    print i["Acceptable_age_range"]
+
     print "Likes"
     print i["Likes"]
+
+    print "Dislikes"
+    print i["Dislikes"]
+
+    print "Books"
+    print i["Books"]
+
     print "\n\n"
