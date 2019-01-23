@@ -6,9 +6,12 @@ files_in_folder = []
 
 for (directPath, dirNames, fileNames) in walk(folder_path):
     files_in_folder.extend(fileNames)
-    print files_in_folder
+    # print files_in_folder
 
 list_of_dictionary_profiles_data = []
+
+#declare unique id
+uniqueId =0
 
 # iterating every profile, storing info to list_of_profiles_data
 for i in files_in_folder:
@@ -70,6 +73,8 @@ for i in files_in_folder:
                 else:
                     dictionary[data[0]] = data[1].strip()
 
+    dictionary["id"] = uniqueId
+    uniqueId = int(uniqueId)+int(1)
     list_of_dictionary_profiles_data.append(dictionary)
 
 # # TO pring all user profile and its data
@@ -79,6 +84,9 @@ for i in files_in_folder:
 # # How to retrieve: Eg: retrieve all member names and gender
 
 for i in list_of_dictionary_profiles_data:
+    print "Unique Id"
+    print i["id"]
+
     print "Name: " + i["Name"]
     print "Gender: " + i["Gender"]
     print "Country" + i["Country"]
@@ -102,3 +110,15 @@ for i in list_of_dictionary_profiles_data:
     print i["Books"]
 
     print "\n\n"
+
+
+# example code
+def accessBooksData(dictionary):
+    print dictionary["Name"]
+    print dictionary["id"]
+    print dictionary["Books"]
+
+
+
+for dict in list_of_dictionary_profiles_data:
+    accessBooksData(dict)
