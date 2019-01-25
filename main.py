@@ -31,9 +31,9 @@ for i in files_in_folder:
                 lines = lines.replace("Male","M")
                 lines = lines.replace("Female","F")
                 lines = lines.replace("male","M")
-                lines = lines.replace("female","M")
+                lines = lines.replace("female","F")
                 lines = lines.replace("m","M")
-                lines = lines.replace("f","M")
+                lines = lines.replace("f","F")
 
         # separate to 2 per list via ":" character
             data = lines.split(":")
