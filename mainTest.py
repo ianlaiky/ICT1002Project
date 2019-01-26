@@ -1,8 +1,8 @@
 from main import run as main
 
 
-def mainTest():
-    list_of_dictionary_profiles_data = main("./profiles/")  #Replace parameter with GUI's folder_path
+def mainTest(path):
+    list_of_dictionary_profiles_data = main(path)
 
     for i in list_of_dictionary_profiles_data:
         print "Unique Id: ", i["id"]
