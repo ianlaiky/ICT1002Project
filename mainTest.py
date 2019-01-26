@@ -1,37 +1,29 @@
 from main import run as main
 
-list_of_dictionary_profiles_data = main("./profiles/")
 
-for i in list_of_dictionary_profiles_data:
-    print "Unique Id"
-    print i["id"]
+def mainTest():
+    list_of_dictionary_profiles_data = main("./profiles/")  #Replace parameter with GUI's folder_path
 
-    print "Name "
-    print i["Name"]
+    for i in list_of_dictionary_profiles_data:
+        print "Unique Id: ", i["id"]
 
-    print "Gender "
-    print i["Gender"]
+        print "Name: ", i["Name"]
 
-    print "Country "
-    print i["Country"]
+        print "Gender: ", i["Gender"]
 
-    print "Acceptable_country "
-    print i["Acceptable_country"]
+        print "Country: ", i["Country"]
 
-    print "Age "
-    print i["Age"]
+        print "Acceptable_country: ", i["Acceptable_country"]
 
-    print "Acceptable_age_range "
-    print i["Acceptable_age_range"]
+        print "Age: ", i["Age"]
 
-    print "Likes "
-    print i["Likes"]
+        print "Acceptable_age_range: ", i["Acceptable_age_range"]
 
-    print "Dislikes "
-    print i["Dislikes"]
+        print "Likes: ", i["Likes"]
 
-    print "Books"
-    print i["Books"]
+        print "Dislikes: ", i["Dislikes"]
 
-    print "\n"
-    print "----------------------------------------------------------------------------------------------------------------------------"
+        print "Books:", i["Books"]
+
+        print "\n"
+        print "----------------------------------------------------------------------------------------------------------------------------"
