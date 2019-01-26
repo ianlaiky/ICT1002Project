@@ -35,7 +35,7 @@ class AppFrame(wx.Frame):
     def onEnter(self,event):
         folder_path = self.folderPrompt.GetValue()   # Gets string input by user and assign it to folder_path
         folder_path.lower()                 # change folder_path to lowercase to avoid collisions
-        mainTest()
+        mainTest(folder_path)
 
     def Func4(self,event):
         main()
