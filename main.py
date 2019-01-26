@@ -1,6 +1,5 @@
 from os import walk
 
-
 def readFolder(path):
     """
     :param path: path of profiles stored
@@ -9,6 +8,12 @@ def readFolder(path):
     files_in_folder = []
     for (directPath, dirNames, fileNames) in walk(path):
         files_in_folder.extend(fileNames)
+
+    '''
+    Removes files that does not ends with ".txt"
+    '''
+    files_in_folder = [fi for fi in files_in_folder if fi.endswith(".txt")]
+
     return files_in_folder
 
 
@@ -183,4 +188,3 @@ def run(folder_Path):
     list_of_dictionary_profiles_data = convertFileListToProfileList(folder_Path, files_in_folder)
 
     return list_of_dictionary_profiles_data
-
