@@ -1,4 +1,5 @@
 import wx
+import os
 from function4_testing import *
 from mainTest import mainTest
 
@@ -12,14 +13,18 @@ class AppFrame(wx.Frame):
                                                value="./profiles/")
 
         if self.folderPrompt.ShowModal() == wx.ID_OK:
-            self.onEnter(self)              #Replace this w a check if file can open function
+            self.checkFileExists(self)      #Replace this w a check if file can open function
 
-        Func1 = wx.Button(panel, label="Func1", pos=(100, 10), size=(80, 40))
-        Func2 = wx.Button(panel, label="Top 3 Best Matched", pos=(200, 10), size=(200, 40))
+        Func1 = wx.Button(panel, label="Func1", pos=(50, 10), size=(150, 40))
+        Func2 = wx.Button(panel, label="Top 3 Best Matched", pos=(250, 10), size=(150, 40))
+        Func3 = wx.Button(panel, label="Function 3", pos=(50, 100), size=(150, 40))
+        Func4 = wx.Button(panel, label="Function 4", pos=(250, 100), size=(150, 40))
+
         ExitButton = wx.Button(panel, label="Exit", pos=(250, 400), size=(80, 30))
 
         self.Bind(wx.EVT_BUTTON, self.onEnter, Func1)
         self.Bind(wx.EVT_BUTTON, self.Func4, Func2)
+        #Insert Func3 and Func4 Bind events here when ready
         self.Bind(wx.EVT_BUTTON, self.exitButton, ExitButton)
         self.Bind(wx.EVT_CLOSE, self.exitWindow)
 
@@ -29,12 +34,13 @@ class AppFrame(wx.Frame):
     def exitWindow(self, event):
         self.Destroy()
 
-    #def menu(self):
+    def checkFileExists(self, event):
+        global folder_path
+        folder_path = self.folderPrompt.GetValue()  # Gets string input by user and assign it to folder_path
+        if os.path.isdir(folder_path):
+            self.onEnter(self)                      #This currently will still continue if fail, but Func1 will not work
 
-
-    def onEnter(self,event):
-        folder_path = self.folderPrompt.GetValue()   # Gets string input by user and assign it to folder_path
-        folder_path.lower()                 # change folder_path to lowercase to avoid collisions
+    def onEnter(self, event):
         mainTest(folder_path)
 
     def Func4(self,event):
