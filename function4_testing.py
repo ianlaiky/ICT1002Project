@@ -68,6 +68,8 @@ sample_list = [{'Name': 'Michael Jackson', 'Gender': 'M', 'Age': '29', 'Dislikes
 
 def main():
     print "For Michael:"
+    print func4('Michael Jackso', sample_list) #first use case to test for wrong input
+    print "\nFor Michael:"
     print func4('Michael Jackson', sample_list)
     print "\nFor Carol:"
     print func4('Carol', sample_list)
