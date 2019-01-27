@@ -1,4 +1,7 @@
-from function4 import func4
+"""
+Python File: function2.py
+Author: Goh Jun Yan
+"""
 
 sample_list = [{'Name': 'Michael Jackson', 'Gender': 'M', 'Age': '29', 'Dislikes': ['durain', 'garlic', 'swimming'],
                 'Acceptable_age_range': '18-29', 'Acceptable_country': ['Singapore', 'China'],
@@ -66,29 +69,74 @@ sample_list = [{'Name': 'Michael Jackson', 'Gender': 'M', 'Age': '29', 'Dislikes
                 'Likes': ['garlic', 'durain', 'swimming', 'chicken and chops'], 'Country': 'Singapore', 'id': 9}]
 
 
+def list_matched_country(id, dataList):
+
+    """
+    List all the students that fall in to the acceptable country of B should be printed out
+    Return: matched_users   (list)
+    """
+
+    # Selected user
+    print "User : ", dataList[id]['Name']
+
+    """ Initialization """
+    user_acceptable_country_str = ''
+    user_acceptable_country_list = []
+    matched_users = []
+
+    """" Flags """
+    # To check later on if it is str(0) or list(1)
+    strOrList = -1
+    # Check the user's index in the list
+    user_index = -1
+
+    """
+    Iterates through the dataList to get the user's acceptable country and get the user's index so we can
+    ignore the index during loops
+    """
+    for user in dataList:
+        if user['id'] == id:
+            # Record index
+            user_index = dataList.index(user)
+            # Checks if the dict value is a str
+            if isinstance(user['Acceptable_country'], str):
+                user_acceptable_country_str = user['Acceptable_country']
+                strOrList = 0
+            # Checks if the dict value is a list
+            elif isinstance(user['Acceptable_country'], list):
+                user_acceptable_country_list = user['Acceptable_country']
+                strOrList = 1
+            break
+
+    """
+    Iterates through the dataList, ignores selected user's index and compares the other user's country to
+    the user acceptable country (str/list). If matched, append the other user's Name(for now) to matched_users list        
+    """
+    if user_index == -1:
+        print "Error: Unable to get user index"
+    elif strOrList == -1:
+        print "Error: String or List"
+    elif strOrList == 0:
+        for other_user in dataList:
+            if dataList.index(other_user) == user_index:
+                continue
+            elif other_user['Country'] == user_acceptable_country_str:
+                # Appending only names for now
+                matched_users.append(other_user['Name'])
+    elif strOrList == 1:
+        for country in user_acceptable_country_list:
+            for other_user in dataList:
+                if dataList.index(other_user) == user_index:
+                    continue
+                elif other_user['Country'] == country:
+                    # Appending only names for now
+                    matched_users.append(other_user['Name'])
+
+    return matched_users
+
 def main():
-    print "For Michael:"
-    print func4('Michael Jackso', sample_list) #first use case to test for wrong input
-    print "\nFor Michael:"
-    print func4('Michael Jackson', sample_list)
-    print "\nFor Carol:"
-    print func4('Carol', sample_list)
-    print "\nFor Kevin:"
-    print func4('Kevin', sample_list)
-    print "\nFor Rose:"
-    print func4('Rose', sample_list)
-    print "\nFor Shelley:"
-    print func4('Shelley', sample_list)
-    print "\nFor Joel:"
-    print func4('Joel Jackson', sample_list)
-    print "\nFor Jenny:"
-    print func4('Jenny Wang', sample_list)
-    print "\nFor Angela:"
-    print func4('Angela Little', sample_list)
-    print "\nFor Lisa:"
-    print func4('Lisa Marie', sample_list)
-    print "\nFor Teresa:"
-    print func4('Teresa', sample_list)
+    # This is printing (id=4)Kevin's
+    print list_matched_country(4, sample_list)
 
 
 if __name__ == '__main__':
