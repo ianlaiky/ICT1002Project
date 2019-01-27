@@ -1,6 +1,7 @@
 import wx
 import os
-from function4_testing import *
+from function2 import main as Func2
+from function4_testing import main as Func4
 from mainTest import mainTest
 
 class AppFrame(wx.Frame):
@@ -16,15 +17,16 @@ class AppFrame(wx.Frame):
             self.checkFileExists(self)      #Replace this w a check if file can open function
 
         Func1 = wx.Button(panel, label="Func1", pos=(50, 10), size=(150, 40))
-        Func2 = wx.Button(panel, label="Top 3 Best Matched", pos=(250, 10), size=(150, 40))
-        Func3 = wx.Button(panel, label="Function 3", pos=(50, 100), size=(150, 40))
-        Func4 = wx.Button(panel, label="Function 4", pos=(250, 100), size=(150, 40))
+        Func2 = wx.Button(panel, label="Matched Students", pos=(250, 10), size=(150, 40))
+        Func3 = wx.Button(panel, label="Top 3 Best Matched (Likes/Dislikes)", pos=(50, 100), size=(150, 40))
+        Func4 = wx.Button(panel, label="Top 3 Best Matched (Books)", pos=(250, 100), size=(150, 40))
 
         ExitButton = wx.Button(panel, label="Exit", pos=(250, 400), size=(80, 30))
 
         self.Bind(wx.EVT_BUTTON, self.onEnter, Func1)
-        self.Bind(wx.EVT_BUTTON, self.Func4, Func2)
-        #Insert Func3 and Func4 Bind events here when ready
+        self.Bind(wx.EVT_BUTTON, self.Func2, Func2)
+        self.Bind(wx.EVT_BUTTON, self.Func4, Func4)
+        #Insert Func3, 5-7 Bind events here when ready
         self.Bind(wx.EVT_BUTTON, self.exitButton, ExitButton)
         self.Bind(wx.EVT_CLOSE, self.exitWindow)
 
@@ -43,8 +45,11 @@ class AppFrame(wx.Frame):
     def onEnter(self, event):
         mainTest(folder_path)
 
+    def Func2(self, event):
+        Func2()
+
     def Func4(self,event):
-        main()
+        Func4()
 
 if __name__ == "__main__":
     app = wx.App(False)         # <--- Set to False to output to console, True to output to popup window
