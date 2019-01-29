@@ -2,8 +2,8 @@
 Python File: function4.py
 Author: Lee Jonathan
 Created: 23/01/2019
-Last Modified: 23/01/2019
-Requires: FuzzyWuzzy Lib and Levenshtein Libraries
+Last Modified: 29/01/2019
+Requires: FuzzyWuzzy Lib, Levenshtein Libraries and functions from main
 """
 
 from main import run as getData
@@ -60,11 +60,35 @@ def cmp_books(user_book_list, cmp_book_dict):
     total_likeable_percentage_dict = sorted(total_likeable_percentage_dict.items(), key=operator.itemgetter(1),
                                             reverse=True)
 
-    """Takes first 3 values of sorted struct and store in list to be returned"""
-    for x in xrange(3):
-        top_3_id_lst.append(total_likeable_percentage_dict[x][0])
+    return total_likeable_percentage_dict
 
-    return top_3_id_lst
+
+def best3(list_of_tuples):
+    """
+    Takes the first 3 ids and puts them in a list
+    :param list_of_tuples:
+    :return: list_to_be_returned
+    """
+
+    list_to_be_returned = []
+    for x in xrange(3):
+        list_to_be_returned.append(list_of_tuples[x][0])
+
+    return list_to_be_returned
+
+
+def get_all_ids(list_of_tuples):
+    """
+    Takes in list of tuples and convert to list of ids
+    :param list_of_tuples:
+    :return: list_of_ids
+    """
+
+    list_of_ids = []
+    for tuple in list_of_tuples:
+        list_of_ids.append(tuple[0])
+
+    return list_of_ids
 
 
 def id_to_names(id_list, input_list):
@@ -129,11 +153,18 @@ def func4(name, input_list):
         books_dict_to_cmp = all_books(list_of_ids, input_list)
 
         """
-        Get top 3 ids based on liked books
+        Get ids in desc order based on liked books
         Takes in the list of books from users
         and dictionary of other books to compare with
         """
-        best_3_ids = cmp_books(books_of_user, books_dict_to_cmp)
+        best_matched_ids = cmp_books(books_of_user, books_dict_to_cmp)
+
+        """
+        Gets the top 3 ids based on liked books
+        Takes in id list of tuples
+        Returns top3 ids to match with as a list
+        """
+        best_3_ids = best3(best_matched_ids)
 
         """
         Get list of names of best matched students
@@ -148,10 +179,68 @@ def func4(name, input_list):
         print "No such user %s, please try again!" %name #if name does not exist, print this
 
 
+def func4_returnallids(name, input_list):
+    """
+    Takes in list of profiles and name to match with
+    Outputs list of ids for ALL matched according to
+    interests in books
+    """
+
+    try:
+
+        """Initialize function var"""
+        books_of_user = []  #used to get books from given user
+        list_of_ids = []  #stores list of ids inclu. id of given user and ids of same gender to avoid
+        gender_of_user = '' #store gender of user so can avoid those profiles
+
+        """
+        Iterate through profiles to get
+        list of books and id from given user
+        """
+        for profile in input_list:
+            if name == profile['Name']:  #if matches username
+                books_of_user = profile['Books'][:]  #get book list and store as func var
+                list_of_ids.append(profile['id'])  #store id into func var
+                gender_of_user = profile['Gender'] #store gender as func var
+
+        """
+        Wow this might be pretty inefficient
+        Re-iterate through profiles to get 
+        all ids of same gender as given user
+        """
+        for profile in input_list:
+            if gender_of_user == profile['Gender']: # if the gender matches that of user
+                list_of_ids.append(profile['id']) # add id to list to be ignored
+
+
+        """
+        Get all the books except those belonging to user
+        Takes in ids to be ignored incl. user and list of profiles
+        """
+        books_dict_to_cmp = all_books(list_of_ids, input_list)
+
+        """
+        Get list of tuples of ids and values in desc order based on liked books
+        Takes in the list of books from users
+        and dictionary of other books to compare with
+        """
+        best_matched_ids = cmp_books(books_of_user, books_dict_to_cmp)
+
+        """
+        Take list of tuples and return list of all ids
+        """
+        best_matched_ids = get_all_ids(best_matched_ids)
+
+        return best_matched_ids
+
+    except ValueError:
+        print "No such user %s, please try again!" %name #if name does not exist, print this
+
+
 def main():
     # Get data dynamically based on the profiles listed from filepath
     sample_list = getData('./profiles/')
-    func4('Joel Jackson', sample_list)
+    func4_returnallids('Joel Jackson', sample_list)
 
 
 if __name__ == '__main__':
