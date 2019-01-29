@@ -8,21 +8,31 @@ Requires: FuzzyWuzzy Lib, Levenshtein Libraries and in-built libraries from func
 from fuzzywuzzy import fuzz
 from function4 import best3
 from main import run as getData
-import operator
 
-def likes(id_list, likes_list):
 
+def likes(id_list, input_list):
+    """
+    Creates list of likes to be compared with
+    :param id_list: @list -> list of ids to ignore
+    :param input_list: @list -> list of profiles
+    :return: likes: @list -> return list of likes to compare with
+    """
     likes = {}
-    for profile in likes_list:
+    for profile in input_list:
         if not profile['id'] in id_list:  # if id does not match user ids to be ignored
             likes[profile['id']] = profile['Likes']  # match that user's id to likes they have
 
     return likes  # saved as dict so can map user to his/her likes when comparing
 
-def dislikes(id_list, dislikes_list):
-
+def dislikes(id_list, input_list):
+    """
+    Creates list of dislikes to be compared with
+    :param id_list: @list -> list of ids to ignore
+    :param input_list: @ist -> list of profiles
+    :return: likes: @list -> return list of dislikes to compare with
+    """
     dislikes = {}
-    for profile in dislikes_list:
+    for profile in input_list:
         if not profile['id'] in id_list:  # if id does not match user ids to be ignored
             dislikes[profile['id']] = profile['Dislikes']  # match that user's id to their dislikes
 
@@ -30,8 +40,12 @@ def dislikes(id_list, dislikes_list):
 
 def cmp_likes(user_likes_list, cmp_likes_dict, user_dislikes_list, cmp_dislikes_dict):
     """
-    Compares both the likes and dislikes of each user and compare them to the rest
-    Returns list of tuples
+    Compares both the likes, dislikes and return result based on algo
+    :param user_likes_list: @list -> list of user's likes
+    :param cmp_likes_dict: @list -> list of likes to compare with
+    :param user_dislikes_list: @list -> list of user's dislikes
+    :param cmp_dislikes_dict: @list -> list of dislikes to compare with
+    :return: total_rating_dict: @dict -> dictionary of ids tagged to score
     """
 
     """Initialize func var"""
@@ -45,11 +59,10 @@ def cmp_likes(user_likes_list, cmp_likes_dict, user_dislikes_list, cmp_dislikes_
 
 
     """Iterate through loop to calculate matchabiity"""
-    for key, value in cmp_likes_dict.items(): ##cmp likes with likes
+    for key, value in cmp_likes_dict.items(): #cmp likes with likes
         for cmp_like in value:
             for user_like in user_likes_list:
-                user_likeable_percentage_lst.append(fuzz.partial_token_set_ratio(user_like,
-                                                                                 cmp_like))  # using Levenshtein Distance (partial_token_set_ratio) to calculate
+                user_likeable_percentage_lst.append(fuzz.partial_token_set_ratio(user_like, cmp_like))  # using Levenshtein Distance (partial_token_set_ratio) to calculate
         total_likeable_percentage_dict[key] = sum(user_likeable_percentage_lst) / len(
             user_likeable_percentage_lst)  # get average based on matched %
         del user_likeable_percentage_lst[:]  # clear list after each person is iterated through
@@ -57,10 +70,8 @@ def cmp_likes(user_likes_list, cmp_likes_dict, user_dislikes_list, cmp_dislikes_
     for key, value in cmp_dislikes_dict.items(): #cmp dislikes with dislikes
         for cmp_dislikes in value:
             for user_dislike in user_dislikes_list:
-                user_dislikeable_percentage_lst.append(fuzz.partial_token_set_ratio(user_dislike,
-                                                                                 cmp_dislikes))  # using Levenshtein Distance (partial_token_set_ratio) to calculate
-        total_dislikeable_percentage_dict[key] = sum(user_dislikeable_percentage_lst) / len(
-            user_dislikeable_percentage_lst)  # get average based on matched %
+                user_dislikeable_percentage_lst.append(fuzz.partial_token_set_ratio(user_dislike, cmp_dislikes))  # using Levenshtein Distance (partial_token_set_ratio) to calculate
+        total_dislikeable_percentage_dict[key] = sum(user_dislikeable_percentage_lst) / len(user_dislikeable_percentage_lst)  # get average based on matched %
         del user_dislikeable_percentage_lst[:]  # clear list after each person is iterated through
 
     for key, value in cmp_dislikes_dict.items(): #cmp user likes with cmp_list dislikes
@@ -75,14 +86,20 @@ def cmp_likes(user_likes_list, cmp_likes_dict, user_dislikes_list, cmp_dislikes_
     Iterate through likeable and dislikeable percentage to calculate value of rating
     Stores as a dictionary
     """
-    for like_key, like_value in total_likeable_percentage_dict.iteritems():
-        if total_dislikeable_percentage_dict.has_key(like_key) and total_contradict_percentage_dict.has_key(like_key):
+    for like_key, like_value in total_likeable_percentage_dict.iteritems(): #for every id and like percentage value
+        if total_dislikeable_percentage_dict.has_key(like_key) and total_contradict_percentage_dict.has_key(like_key): #if the id exist in both other dict
             rating = (2 * like_value) + (2*total_dislikeable_percentage_dict[like_key]) - (1.5 * total_contradict_percentage_dict[like_key])#rating calculated by 2 * cmp_like_rating + 2 * cmp_dislike_rating - 1.5 * contradict
-            total_rating_dict[like_key] = rating
+            total_rating_dict[like_key] = rating #store in dict
 
     return total_rating_dict
 
 def id_to_names(id_list, input_list):
+    """
+    Take list of ids and convert to names
+    :param id_list: @list -> list of ids
+    :param input_list: @list -> list of profiles
+    :return: name_list: @list -> list of names
+    """
     """
     Convert ids to names
     Takes in list of ids and dictionary of profiles
@@ -100,13 +117,15 @@ def id_to_names(id_list, input_list):
 
     return name_list
 
-def func3(name, inputlist):
-    """
-    Takes in list of profiles and name to match with
-    Outputs list of top 3 names matched according to
-    interests in likes and dislikes
-    """
 
+def func3(name, inputlist, OUTPUT_FLAG=0):
+    """
+    Based on user's book interest, give out 3 most suited candidates for matching or return whole dataset
+    :param name: @string -> name of user
+    :param inputlist: @list -> list of profiles
+    :param OUTPUT_FLAG: @int -> if =0 return top 3 ids based on book pref elif =1 return dataset of full scores
+    :return:
+    """
     try:
         """Initialize function var"""
         likes_of_user = []  # used to get likes from given user
@@ -117,8 +136,8 @@ def func3(name, inputlist):
 
         for profile in inputlist:
             if name == profile['Name']:  # if matches username
-                likes_of_user = profile['Likes'][:]  # get book list and store as func var
-                dislikes_of_user = profile["Dislikes"][:]
+                likes_of_user = profile['Likes'][:]  # get likes and store as func var
+                dislikes_of_user = profile["Dislikes"][:] #get dislikes and store as func var
                 list_of_ids.append(profile['id'])  # store id into func var
                 gender_of_user = profile['Gender']  # store gender as func var
 
@@ -138,62 +157,22 @@ def func3(name, inputlist):
         """
         best_matched_ids = cmp_likes(likes_of_user, likes_dict_to_cmp, dislikes_of_user, dislikes_dict_to_cmp)
 
-        """
-        Sorts and Gets list of best 3 ids based on list of values
-        """
-        best_3_ids = best3(best_matched_ids)
+        if OUTPUT_FLAG == 1:
+            return best_matched_ids
+        elif OUTPUT_FLAG == 0:
+            """
+            Sorts and Gets list of best 3 ids based on list of values
+            """
+            best_3_ids = best3(best_matched_ids)
 
-        """
-        Get list of names of best matched students
-        Takes on best 3 ids given by cmp_likes function
-        and list of profiles
-        """
-        list_of_profile_names = id_to_names(best_3_ids, inputlist)
+            """
+            Get list of names of best matched students
+            Takes on best 3 ids given by cmp_likes function
+            and list of profiles
+            """
+            list_of_profile_names = id_to_names(best_3_ids, inputlist)
 
-        return list_of_profile_names
-
-    except ValueError:
-        print "No such user %s, please try again!" %name #if name does not exist, print this
-
-
-def func3_returnalldata(name, inputlist):
-    """
-    Takes in list of profiles and name to match with
-    Outputs list of ALL data matched according to
-    interests in likes and dislikes
-    """
-
-    try:
-
-        """Initialize function var"""
-        likes_of_user = []  # used to get likes from given user
-        dislikes_of_user = []  # same as above but for dislikes
-        list_of_ids = []  # stores list of ids inclu. id of given user and ids of same gender to avoid
-        gender_of_user = ''  # store gender of user so can avoid those profiles
-
-        for profile in inputlist:
-            if name == profile['Name']:  # if matches username
-                likes_of_user = profile['Likes'][:]  # get book list and store as func var
-                dislikes_of_user = profile["Dislikes"][:]
-                list_of_ids.append(profile['id'])  # store id into func var
-                gender_of_user = profile['Gender']  # store gender as func var
-
-        for profile in inputlist:
-            if gender_of_user == profile['Gender']:  # if the gender matches that of user
-                list_of_ids.append(profile['id'])  # add id to list to be ignored
-
-        """
-        Get both the likes and dislikes of users and store in a dict
-        """
-        likes_dict_to_cmp = likes(list_of_ids, inputlist)
-        dislikes_dict_to_cmp = dislikes(list_of_ids, inputlist)
-
-        """
-        Get list of ids and ratings in desc order for user based on algorithm
-        """
-        best_matched_ids = cmp_likes(likes_of_user, likes_dict_to_cmp, dislikes_of_user, dislikes_dict_to_cmp)
-
-        return best_matched_ids
+            return list_of_profile_names
 
     except ValueError:
         print "No such user %s, please try again!" %name #if name does not exist, print this
@@ -222,7 +201,7 @@ def main():
     print func3('Lisa Marie', sample_list)
     print "\nFor Teresa:"
     print func3('Teresa', sample_list)
-    print func3_returnalldata('Michael Jackson', sample_list)
+    print func3('Michael Jackson', sample_list, 1)
 
 
 if __name__ == '__main__':
