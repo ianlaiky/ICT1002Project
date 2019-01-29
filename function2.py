@@ -5,7 +5,7 @@ Author: Goh Jun Yan
 from main import run as getData
 
 
-def list_matched_country(value, data_list, id_or_name):
+def list_matched_country(value, data_list, id_or_name=1):
 
     """
     List all the students that fall in to the acceptable country of B should be printed out
@@ -83,7 +83,7 @@ def main():
     # Get data dynamically based on the profiles listed from filepath
     sample_list = getData('./profiles/')
     # list_matched_country(id(int)/Name(str), data input(list), id or name output type(0->id, 1->Name))
-    print list_matched_country(1, sample_list, 0)
+    print list_matched_country(1, sample_list)
 
 
 if __name__ == '__main__':
