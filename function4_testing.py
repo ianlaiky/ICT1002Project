@@ -1,9 +1,9 @@
 from main import run as getData
 from function4 import func4
 
-def main():
+def main(folder_path):
     # Get data dynamically based on the profiles listed from filepath
-    sample_list = getData("./profiles/")
+    sample_list = getData(folder_path)
     print "For Michael:"
     print func4('Michael Jackso', sample_list) #first use case to test for wrong input
     print "\nFor Michael:"

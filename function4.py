@@ -237,10 +237,10 @@ def func4_returnallids(name, input_list):
         print "No such user %s, please try again!" %name #if name does not exist, print this
 
 
-def main():
+def main(folder_path):
     # Get data dynamically based on the profiles listed from filepath
-    sample_list = getData('./profiles/')
-    func4_returnallids('Joel Jackson', sample_list)
+    sample_list = getData(folder_path)
+    func4_returnallids("Joel Jackson", sample_list)
 
 
 if __name__ == '__main__':
