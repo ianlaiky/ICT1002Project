@@ -7,13 +7,18 @@ from function4_testing import main as Func4
 from function5 import main as Func5
 from mainTest import mainTest
 
-class OtherFrame(wx.Frame):
+
+class OutputWindow(wx.TextCtrl):
     """
-    Class used for creating other frames other than the main frame
+    Class used for creating the output window
     """
-    def __init__(self, title, parent=None):
-        wx.Frame.__init__(self, parent=parent, title=title)
-        self.Show()
+    def __init__(self):
+        frame2 = wx.Frame(None,-1, "Application Name - Output", size=(500,500))
+        frame2.Show()
+        self.parent = frame2
+        wx.TextCtrl.__init__(self,self.parent,size=(485,460), style=wx.TE_MULTILINE|wx.TE_READONLY| wx.HSCROLL)
+        sys.stdout = self
+        print("=== Ready for output! ===\n")
 
 
 class AppPanel(wx.Panel):
@@ -22,14 +27,7 @@ class AppPanel(wx.Panel):
     """
     def __init__(self, parent):
         wx.Panel.__init__(self, parent)
-        self.frame_number = 1
         self.parent = parent
-
-    """Not In Use Yet"""
-    def on_new_frame(self, event):
-        title = 'SubFrame {}'.format(self.frame_number)
-        frame = OtherFrame(title=title, parent=self.parent)
-        self.frame_number += 1
 
 
 class MainFrame(wx.Frame):
@@ -40,21 +38,7 @@ class MainFrame(wx.Frame):
         wx.Frame.__init__(self, parent, id, title="Application Name", size=(500, 500))
         panel = AppPanel(self)
 
-        '''Prompts User for folder Path'''
-        while True:
-            self.folderPrompt = wx.TextEntryDialog(None, message="Enter folder path:", caption="Application Name",
-                                                   value="./profiles/")
-
-            if self.folderPrompt.ShowModal() == wx.ID_OK:
-                global folder_path
-                folder_path = self.folderPrompt.GetValue()  # Gets string input by user and assign it to folder_path
-                if os.path.isdir(folder_path):
-                    print("Directory Verified")
-                    break
-                else:
-                    print("Error: Not a Directory")
-            else:
-                sys.exit()
+        self.folder_prompt()
 
         '''Creating Buttons'''
         Func1 = wx.Button(panel, label="Print all Details", pos=(100, 10), size=(300, 40))
@@ -62,8 +46,9 @@ class MainFrame(wx.Frame):
         Func3 = wx.Button(panel, label="Top 3 Best Matched (Likes/Dislikes)", pos=(100, 110), size=(300, 40))
         Func4 = wx.Button(panel, label="Top 3 Best Matched (Books)", pos=(100, 160), size=(300, 40))
         Func5 = wx.Button(panel, label="Top 3 Best Matched (Overall)", pos=(100, 210), size=(300, 40))
+        Func6 = wx.Button(panel, label="Output Top 3 Matches to CSV", pos=(100, 260), size=(300, 40))
 
-        ExitButton = wx.Button(panel, label="Exit", pos=(250, 400), size=(80, 30))
+        ExitButton = wx.Button(panel, label="Exit", pos=(210, 400), size=(80, 30))
 
         '''Binding buttons to actions'''
         self.Bind(wx.EVT_BUTTON, self.Func1, Func1)
@@ -71,36 +56,67 @@ class MainFrame(wx.Frame):
         self.Bind(wx.EVT_BUTTON, self.Func3, Func3)
         self.Bind(wx.EVT_BUTTON, self.Func4, Func4)
         self.Bind(wx.EVT_BUTTON, self.Func5, Func5)
-
-        #Insert Func6-7 Bind events here when ready
+        #self.Bind(wx.EVT_BUTTON, self.Func6, Func6)
+        #self.Bind(wx.EVT_BUTTON,self.Func7, Func7)
         self.Bind(wx.EVT_BUTTON, self.exitButton, ExitButton)
         self.Bind(wx.EVT_CLOSE, self.exitWindow)
 
+    '''Prompts user to enter folder path'''
+    def folder_prompt(self):
+        while True:
+            self.folderPrompt = wx.TextEntryDialog(None, message="Enter folder path:", caption="Application Name",
+                                                   value="./profiles/")
+            '''Checks if its a directory'''
+            if self.folderPrompt.ShowModal() == wx.ID_OK:
+                global folder_path
+                folder_path = self.folderPrompt.GetValue()  # Gets string input by user and assign it to folder_path
+                if os.path.isdir(folder_path):
+                    wx.MessageBox("Directory Verified", "Info", wx.OK | wx.ICON_INFORMATION)
+                    break
+                else:
+                    wx.MessageBox("Error: Not a Directory", "Error", wx.OK | wx.ICON_ERROR)
+            else:
+                sys.exit()
+
+    '''Defines what the Exit Button do'''
     def exitButton(self, event):
         self.Close(True)
-        sys.exit()
 
+    '''Defines what clicks the X button or Exit button do'''
     def exitWindow(self, event):
-        self.Destroy()
-        sys.exit()
+        dlg = wx.MessageDialog(self, "Confirm to Exit?", "Exit", wx.YES_NO | wx.ICON_WARNING)
+        if dlg.ShowModal() == wx.ID_YES:
+            self.Destroy()
+            sys.exit()
+        dlg.Destroy()
 
     def Func1(self, event):
+        OutputWindow()
         mainTest(folder_path)
 
     def Func2(self, event):
+        OutputWindow()
         Func2()
 
     def Func3(self, event):
+        OutputWindow()
         Func3()
 
     def Func4(self, event):
-        Func4()
+        OutputWindow()
+        Func4()                 #Error occurrs cos of 1st error test case
 
     def Func5(self, event):
+        OutputWindow()
         Func5()
 
+    #def Func6(self,event):
+        #OutputWindow()
+        #Func6()
+
 if __name__ == "__main__":
-    app = wx.App(True)         # <--- Set to False to output to console, True to output to popup window
+    app = wx.App(False)         # <--- Set to False to output to console, True to output to popup window
     frame = MainFrame(parent=None, id=-1)
     frame.Show()
     app.MainLoop()
+    sys.stdout = sys.__stdout__
