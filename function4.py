@@ -54,42 +54,26 @@ def cmp_books(user_book_list, cmp_book_dict):
             user_likeable_percentage_lst)  # get average based on matched %
         del user_likeable_percentage_lst[:]  # clear list after each person is iterated through
 
-    """
-    Sorts in descending order to get best matched to worst matched in order.
-    Creates list of tuples"""
-    total_likeable_percentage_dict = sorted(total_likeable_percentage_dict.items(), key=operator.itemgetter(1),
-                                            reverse=True)
-
     return total_likeable_percentage_dict
 
 
-def best3(list_of_tuples):
+def best3(input_dict):
     """
-    Takes the first 3 ids and puts them in a list
-    :param list_of_tuples:
+    Sort and takes the first 3 ids and puts them in a list
+    :param input_dict:
     :return: list_to_be_returned
     """
 
+    """
+    Sorts in descending order to get best matched to worst matched in order.
+    Creates list of tuples"""
+    input_dict = sorted(input_dict.items(), key=operator.itemgetter(1),
+                                            reverse=True)
     list_to_be_returned = []
     for x in xrange(3):
-        list_to_be_returned.append(list_of_tuples[x][0])
+        list_to_be_returned.append(input_dict[x][0])
 
     return list_to_be_returned
-
-
-def get_all_ids(list_of_tuples):
-    """
-    Takes in list of tuples and convert to list of ids
-    :param list_of_tuples:
-    :return: list_of_ids
-    """
-
-    list_of_ids = []
-    for tuple in list_of_tuples:
-        list_of_ids.append(tuple[0])
-
-    return list_of_ids
-
 
 def id_to_names(id_list, input_list):
     """
@@ -153,15 +137,15 @@ def func4(name, input_list):
         books_dict_to_cmp = all_books(list_of_ids, input_list)
 
         """
-        Get ids in desc order based on liked books
+        Get data in dict based on liked books
         Takes in the list of books from users
         and dictionary of other books to compare with
         """
         best_matched_ids = cmp_books(books_of_user, books_dict_to_cmp)
 
         """
-        Gets the top 3 ids based on liked books
-        Takes in id list of tuples
+        Sorts and Gets the top 3 ids based on liked books
+        Takes in data in dict
         Returns top3 ids to match with as a list
         """
         best_3_ids = best3(best_matched_ids)
@@ -179,10 +163,10 @@ def func4(name, input_list):
         print "No such user %s, please try again!" %name #if name does not exist, print this
 
 
-def func4_returnallids(name, input_list):
+def func4_returnalldata(name, input_list):
     """
     Takes in list of profiles and name to match with
-    Outputs list of ids for ALL matched according to
+    Outputs list of data for ALL matched according to
     interests in books
     """
 
@@ -220,16 +204,11 @@ def func4_returnallids(name, input_list):
         books_dict_to_cmp = all_books(list_of_ids, input_list)
 
         """
-        Get list of tuples of ids and values in desc order based on liked books
+        Get data based on liked books
         Takes in the list of books from users
         and dictionary of other books to compare with
         """
         best_matched_ids = cmp_books(books_of_user, books_dict_to_cmp)
-
-        """
-        Take list of tuples and return list of all ids
-        """
-        best_matched_ids = get_all_ids(best_matched_ids)
 
         return best_matched_ids
 
@@ -240,7 +219,7 @@ def func4_returnallids(name, input_list):
 def main():
     # Get data dynamically based on the profiles listed from filepath
     sample_list = getData('./profiles/')
-    func4_returnallids('Joel Jackson', sample_list)
+    print func4_returnalldata('Joel Jackson', sample_list)
 
 
 if __name__ == '__main__':

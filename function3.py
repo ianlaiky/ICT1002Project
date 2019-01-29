@@ -6,7 +6,7 @@ Last Modified: 29/01/2019
 Requires: FuzzyWuzzy Lib, Levenshtein Libraries and in-built libraries from function 4 and main
 """
 from fuzzywuzzy import fuzz
-from function4 import best3, get_all_ids
+from function4 import best3
 from main import run as getData
 import operator
 
@@ -80,12 +80,6 @@ def cmp_likes(user_likes_list, cmp_likes_dict, user_dislikes_list, cmp_dislikes_
             rating = (2 * like_value) + (2*total_dislikeable_percentage_dict[like_key]) - (1.5 * total_contradict_percentage_dict[like_key])#rating calculated by 2 * cmp_like_rating + 2 * cmp_dislike_rating - 1.5 * contradict
             total_rating_dict[like_key] = rating
 
-    """
-    Sorts in descending order to get best matched to worst matched in order.
-    Creates list of tuples
-    """
-    total_rating_dict = sorted(total_rating_dict.items(), key=operator.itemgetter(1),
-                                            reverse=True)
     return total_rating_dict
 
 def id_to_names(id_list, input_list):
@@ -114,7 +108,6 @@ def func3(name, inputlist):
     """
 
     try:
-
         """Initialize function var"""
         likes_of_user = []  # used to get likes from given user
         dislikes_of_user = [] # same as above but for dislikes
@@ -139,14 +132,17 @@ def func3(name, inputlist):
         """
         likes_dict_to_cmp = likes(list_of_ids, inputlist)
         dislikes_dict_to_cmp = dislikes(list_of_ids, inputlist)
+
         """
-        Get list of ids and ratings in desc order for user based on algorithm
+        Get dict of data in desc order for user based on algorithm
         """
         best_matched_ids = cmp_likes(likes_of_user, likes_dict_to_cmp, dislikes_of_user, dislikes_dict_to_cmp)
+
         """
-        Returns list of best 3 ids based on list of values
+        Sorts and Gets list of best 3 ids based on list of values
         """
         best_3_ids = best3(best_matched_ids)
+
         """
         Get list of names of best matched students
         Takes on best 3 ids given by cmp_likes function
@@ -160,10 +156,10 @@ def func3(name, inputlist):
         print "No such user %s, please try again!" %name #if name does not exist, print this
 
 
-def func3_returnallids(name, inputlist):
+def func3_returnalldata(name, inputlist):
     """
     Takes in list of profiles and name to match with
-    Outputs list of ALL ids matched according to
+    Outputs list of ALL data matched according to
     interests in likes and dislikes
     """
 
@@ -197,11 +193,6 @@ def func3_returnallids(name, inputlist):
         """
         best_matched_ids = cmp_likes(likes_of_user, likes_dict_to_cmp, dislikes_of_user, dislikes_dict_to_cmp)
 
-        """
-        Take list of tuples and return list of all ids
-        """
-        best_matched_ids = get_all_ids(best_matched_ids)
-
         return best_matched_ids
 
     except ValueError:
@@ -231,7 +222,7 @@ def main():
     print func3('Lisa Marie', sample_list)
     print "\nFor Teresa:"
     print func3('Teresa', sample_list)
-    print func3_returnallids('Michael Jackson', sample_list)
+    print func3_returnalldata('Michael Jackson', sample_list)
 
 
 if __name__ == '__main__':
