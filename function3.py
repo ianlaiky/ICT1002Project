@@ -10,7 +10,6 @@ from function4 import best3, get_all_ids
 from main import run as getData
 import operator
 
-
 def likes(id_list, likes_list):
 
     likes = {}
@@ -20,7 +19,6 @@ def likes(id_list, likes_list):
 
     return likes  # saved as dict so can map user to his/her likes when comparing
 
-
 def dislikes(id_list, dislikes_list):
 
     dislikes = {}
@@ -29,7 +27,6 @@ def dislikes(id_list, dislikes_list):
             dislikes[profile['id']] = profile['Dislikes']  # match that user's id to their dislikes
 
     return dislikes  # saved as dict so can map user to their dislikes when comparing
-
 
 def cmp_likes(user_likes_list, cmp_likes_dict, user_dislikes_list, cmp_dislikes_dict):
     """
@@ -46,7 +43,8 @@ def cmp_likes(user_likes_list, cmp_likes_dict, user_dislikes_list, cmp_dislikes_
     total_contradict_percentage_dict = {}  # compares the likes and dislikes for user and see if matches
     total_rating_dict = {} #rating of user based on likes and dislikes
 
-    """ Iterate through loop to calculate matchabiity"""
+
+    """Iterate through loop to calculate matchabiity"""
     for key, value in cmp_likes_dict.items(): ##cmp likes with likes
         for cmp_like in value:
             for user_like in user_likes_list:
@@ -90,7 +88,6 @@ def cmp_likes(user_likes_list, cmp_likes_dict, user_dislikes_list, cmp_dislikes_
                                             reverse=True)
     return total_rating_dict
 
-
 def id_to_names(id_list, input_list):
     """
     Convert ids to names
@@ -109,7 +106,6 @@ def id_to_names(id_list, input_list):
 
     return name_list
 
-
 def func3(name, inputlist):
     """
     Takes in list of profiles and name to match with
@@ -125,12 +121,14 @@ def func3(name, inputlist):
         list_of_ids = []  # stores list of ids inclu. id of given user and ids of same gender to avoid
         gender_of_user = ''  # store gender of user so can avoid those profiles
 
+
         for profile in inputlist:
             if name == profile['Name']:  # if matches username
                 likes_of_user = profile['Likes'][:]  # get book list and store as func var
                 dislikes_of_user = profile["Dislikes"][:]
                 list_of_ids.append(profile['id'])  # store id into func var
                 gender_of_user = profile['Gender']  # store gender as func var
+
 
         for profile in inputlist:
             if gender_of_user == profile['Gender']:  # if the gender matches that of user
@@ -210,9 +208,9 @@ def func3_returnallids(name, inputlist):
         print "No such user %s, please try again!" %name #if name does not exist, print this
 
 
-def main(folder_path):
+def main():
     # Get data dynamically based on the profiles listed from filepath
-    sample_list = getData(folder_path)
+    sample_list = getData('./profiles/')
     print "For Michael:"
     print func3('Michael Jackson', sample_list)
     print "\nFor Carol:"

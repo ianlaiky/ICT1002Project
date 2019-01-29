@@ -79,9 +79,9 @@ def list_matched_country(value, data_list, id_or_name=1):
     return matched_users
 
 
-def main(folder_path):
+def main():
     # Get data dynamically based on the profiles listed from filepath
-    sample_list = getData(folder_path)
+    sample_list = getData('./profiles/')
     # list_matched_country(id(int)/Name(str), data input(list), id or name output type(0->id, 1->Name))
     print list_matched_country(1, sample_list)
 
