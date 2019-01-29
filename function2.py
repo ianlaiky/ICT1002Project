@@ -20,6 +20,7 @@ def list_matched_country(value, data_list, id_or_name=1):
     user_acceptable_country_str = ''
     user_acceptable_country_list = []
     matched_users = []
+    user_gender = ""
     # To choose output type, 0 -> id, 1 -> Name
     if id_or_name == 0:
         output_type = "id"
@@ -33,14 +34,15 @@ def list_matched_country(value, data_list, id_or_name=1):
     user_index = -1
 
     """
-    Iterates through the data_list to get the user's acceptable country and get the user's index so we can
-    ignore the index during loops
+    Iterates through the data_list to get the user's acceptable country, get the user's index so we can
+    ignore the index during loops and get the gender of the user
     """
     for user in data_list:
         # If searching the data_list using id
         if user['Name'] == value:
             # Record index
             user_index = data_list.index(user)
+            user_gender = user['Gender']
             # Checks if the dict value is a str
             if isinstance(user['Acceptable_country'], str):
                 user_acceptable_country_str = user['Acceptable_country']
@@ -56,12 +58,18 @@ def list_matched_country(value, data_list, id_or_name=1):
     the user acceptable country (str/list). If matched, append the other user's Name(for now) to matched_users list        
     """
     if user_index == -1:
-        print "Error: Unable to get user index"
+        print "Error: (Function 2)Unable to get user index"
+    elif user_gender == "":
+        print "Error: (Function 2)Unable to retrieve gender of user"
     elif str_or_list == -1:
-        print "Error: String or List"
+        print "Error: (Function 2)String or List"
     elif str_or_list == 0:
         for other_user in data_list:
+            # Ignore the selected user
             if data_list.index(other_user) == user_index:
+                continue
+            # Ignore the same sex
+            elif other_user['Gender'] == user_gender:
                 continue
             elif other_user['Country'] == user_acceptable_country_str:
                 # Appending only names for now
@@ -69,7 +77,11 @@ def list_matched_country(value, data_list, id_or_name=1):
     elif str_or_list == 1:
         for country in user_acceptable_country_list:
             for other_user in data_list:
+                # Ignore the selected user
                 if data_list.index(other_user) == user_index:
+                    continue
+                # Ignore the same sex
+                elif other_user['Gender'] == user_gender:
                     continue
                 elif other_user['Country'] == country:
                     # Appending only names for now
