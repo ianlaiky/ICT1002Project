@@ -16,10 +16,10 @@ class AppFrame(wx.Frame):
         if self.folderPrompt.ShowModal() == wx.ID_OK:
             self.checkFileExists(self)      #Replace this w a check if file can open function
 
-        Func1 = wx.Button(panel, label="Func1", pos=(50, 10), size=(150, 40))
-        Func2 = wx.Button(panel, label="Matched Students", pos=(250, 10), size=(150, 40))
-        Func3 = wx.Button(panel, label="Top 3 Best Matched (Likes/Dislikes)", pos=(50, 100), size=(150, 40))
-        Func4 = wx.Button(panel, label="Top 3 Best Matched (Books)", pos=(250, 100), size=(150, 40))
+        Func1 = wx.Button(panel, label="Print all Details", pos=(100, 10), size=(300, 40))
+        Func2 = wx.Button(panel, label="Matched Students", pos=(100, 60), size=(300, 40))
+        Func3 = wx.Button(panel, label="Top 3 Best Matched (Likes/Dislikes)", pos=(100, 110), size=(300, 40))
+        Func4 = wx.Button(panel, label="Top 3 Best Matched (Books)", pos=(100, 160), size=(300, 40))
 
         ExitButton = wx.Button(panel, label="Exit", pos=(250, 400), size=(80, 30))
 
