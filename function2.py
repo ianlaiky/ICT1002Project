@@ -9,8 +9,8 @@ def list_matched_country(value, data_list, id_or_name=1):
 
     """
     List all the students that fall in to the acceptable country of B should be printed out
-    Arguments:
-        value -> Michael Jackson (e.g)
+    Param:
+        value -> Name (str)
         data_list -> Data input (list)
         id_or_name -> 1 (e.g)(0 for id, 1 for Name)
     Return: matched_users   (list)
@@ -38,7 +38,7 @@ def list_matched_country(value, data_list, id_or_name=1):
     """
     for user in data_list:
         # If searching the data_list using id
-        if user['id'] == value:
+        if user['Name'] == value:
             # Record index
             user_index = data_list.index(user)
             # Checks if the dict value is a str
@@ -75,15 +75,15 @@ def list_matched_country(value, data_list, id_or_name=1):
                     # Appending only names for now
                     matched_users.append(other_user[output_type])
 
-    print "Selected user : ", user['Name']
+#    print "Selected user : ", user['Name']
     return matched_users
 
 
 def main():
     # Get data dynamically based on the profiles listed from filepath
     sample_list = getData('./profiles/')
-    # list_matched_country(id(int)/Name(str), data input(list), id or name output type(0->id, 1->Name))
-    print list_matched_country(1, sample_list)
+    # list_matched_country(Name(str), data input(list), id or name output type(0->id, 1->Name)(default value->1))
+    print list_matched_country("Kevin", sample_list)
 
 
 if __name__ == '__main__':
