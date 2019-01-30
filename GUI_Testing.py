@@ -1,12 +1,11 @@
 import sys
 import wx
 import os
-from mainTest import mainTest as list_all_details
+from mainTest import mainTest as List_All_Details
 from function2 import main as Func2
-from function3 import main as Func3
-from function4_testing import main as Func4
-from function5 import main as Func5
-
+from function3 import main as Likes_Matches
+from function4 import main as Books_Matches
+from function5 import main as Overall_Matches
 
 
 class OutputWindow(wx.TextCtrl):
@@ -54,9 +53,9 @@ class MainFrame(wx.Frame):
         '''Binding buttons to actions'''
         self.Bind(wx.EVT_BUTTON, self.List_All_Details, Func1)
         self.Bind(wx.EVT_BUTTON, self.Func2, Func2)
-        self.Bind(wx.EVT_BUTTON, self.Func3, Func3)
-        self.Bind(wx.EVT_BUTTON, self.Func4, Func4)
-        self.Bind(wx.EVT_BUTTON, self.Func5, Func5)
+        self.Bind(wx.EVT_BUTTON, self.Likes_Matches, Func3)
+        self.Bind(wx.EVT_BUTTON, self.Books_Matches, Func4)
+        self.Bind(wx.EVT_BUTTON, self.Overall_Matches, Func5)
         #self.Bind(wx.EVT_BUTTON, self.Func6, Func6)
         #self.Bind(wx.EVT_BUTTON,self.Func7, Func7)
         self.Bind(wx.EVT_BUTTON, self.exitButton, ExitButton)
@@ -94,10 +93,11 @@ class MainFrame(wx.Frame):
 
     def List_All_Details(self, event):
         OutputWindow()
-        list_all_details(folder_path)
+        List_All_Details(folder_path)
 
     def Func2(self, event):
         """
+        #Rename this function to Country_Matches
         self.name_prompt = wx.TextEntryDialog(None, message="Enter your name:", caption="Application Name", value="Kevin")
         if self.name_prompt.ShowModal() == wx.ID_OK:
             global name
@@ -108,17 +108,29 @@ class MainFrame(wx.Frame):
         OutputWindow()
         Func2()
 
-    def Func3(self, event):
-        OutputWindow()
-        Func3()
+    def Likes_Matches(self, event):
+        self.name_prompt = wx.TextEntryDialog(None, message="Enter your name:", caption="Application Name", value="")
+        if self.name_prompt.ShowModal() == wx.ID_OK:
+            global name
+            name = self.name_prompt.GetValue()  # Gets string input by user and assign it to folder_path
+            OutputWindow()
+            Likes_Matches(folder_path, name)
 
-    def Func4(self, event):
-        OutputWindow()
-        Func4()                 #Error occurrs cos of 1st error test case
+    def Books_Matches(self, event):
+        self.name_prompt = wx.TextEntryDialog(None, message="Enter your name:", caption="Application Name", value="")
+        if self.name_prompt.ShowModal() == wx.ID_OK:
+            global name
+            name = self.name_prompt.GetValue()  # Gets string input by user and assign it to folder_path
+            OutputWindow()
+            Books_Matches(folder_path, name)
 
-    def Func5(self, event):
-        OutputWindow()
-        Func5()
+    def Overall_Matches(self, event):
+        self.name_prompt = wx.TextEntryDialog(None, message="Enter your name:", caption="Application Name", value="")
+        if self.name_prompt.ShowModal() == wx.ID_OK:
+            global name
+            name = self.name_prompt.GetValue()  # Gets string input by user and assign it to folder_path
+            OutputWindow()
+            Overall_Matches(folder_path, name)
 
     #def Func6(self,event):
         #OutputWindow()
