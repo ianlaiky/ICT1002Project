@@ -1,27 +1,31 @@
-from function6 import *
+import function6
+import main
+import function5
 
 
-header = ["Top 3 best matched"]
-data = ["For Teresa:",['Michael Jackson', 'Joel Jackson', 'Kevin']]
-data2 = ["For Jenny:",['Michael Jackson', 'Joel Jackson', 'Kevin']]
-data3 = ["For Lisa:",['Michael Jackson', 'Joel Jackson', 'Kevin']]
+def get_all_userProfile(folder_path):
+    return main.run(folder_path)
 
 
-
-
-'''
-To purge data from file
-'''
-clear_file()
-
+def append_data(data):
+    function6.write_file(data)
 
 
 '''
-Example appending data
+Main code
 '''
 
 
-write_file(header)
-write_file(data)
-write_file(data2)
-write_file(data3)
+def run(folder_path):
+    """
+
+    :param folder_path: @String --> Folder path
+    """
+    function6.clear_file()
+    profileList = get_all_userProfile(folder_path)
+    append_data(["Name", "Match with"])
+    for i in profileList:
+        print i["Name"]
+        print function5.func5(i["Name"], profileList)
+
+        append_data([i["Name"], ', '.join(function5.func5(i["Name"], profileList)).replace(",", " |")])
