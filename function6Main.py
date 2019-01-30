@@ -1,3 +1,9 @@
+"""
+Python File: fucntion6Main.py
+Author: Ian Lai Kheng Yan
+"""
+
+
 import function6
 import function1
 import function5
@@ -25,7 +31,7 @@ def run(folder_path):
     profileList = get_all_userProfile(folder_path)
     append_data(["Name", "Match with"])
     for i in profileList:
-        print i["Name"]
-        print function5.func5(i["Name"], profileList)
+        # print i["Name"]
+        # print function5.func5(i["Name"], profileList)
 
         append_data([i["Name"], ', '.join(function5.func5(i["Name"], profileList)).replace(",", " |")])

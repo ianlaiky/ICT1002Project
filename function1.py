@@ -1,4 +1,10 @@
+"""
+Python File: function1.py
+Author: Ian Lai Kheng Yan
+"""
+
 from os import walk
+
 
 def readFolder(path):
     """

@@ -1,3 +1,8 @@
+"""
+Python File: mainTest.py
+Author: Ian Lai Kheng Yan
+"""
+
 from function1 import run as main
 
 
