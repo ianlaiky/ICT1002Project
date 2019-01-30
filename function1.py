@@ -188,3 +188,31 @@ def run(folder_Path):
     list_of_dictionary_profiles_data = convertFileListToProfileList(folder_Path, files_in_folder)
 
     return list_of_dictionary_profiles_data
+
+
+def main(folder_path):
+    list_of_dictionary_profiles_data = run(folder_path)
+
+    for i in list_of_dictionary_profiles_data:
+        print "Unique Id: ", i["id"]
+
+        print "Name: ", i["Name"]
+
+        print "Gender: ", i["Gender"]
+
+        print "Country: ", i["Country"]
+
+        print "Acceptable Countries: ", ", ".join(i["Acceptable_country"])
+
+        print "Age: ", i["Age"]
+
+        print "Acceptable Age Range: ", i["Acceptable_age_range"]
+
+        print "Likes: ", ", ".join(i["Likes"])
+
+        print "Dislikes: ", ", ".join(i["Dislikes"])
+
+        print "Books: \n- ", "\n- ".join(i["Books"])
+
+        print "\n"
+        print "----------------------------------------------------------------------------------------------------------------------------"

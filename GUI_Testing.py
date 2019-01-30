@@ -1,8 +1,8 @@
 import sys
 import wx
 import os
-from mainTest import mainTest as List_All_Details
-from function2 import main as Func2
+from function1 import main as List_All_Details
+from function2 import main as Country_Matches
 from function3 import main as Likes_Matches
 from function4 import main as Books_Matches
 from function5 import main as Overall_Matches
@@ -13,10 +13,10 @@ class OutputWindow(wx.TextCtrl):
     Class used for creating the output window
     """
     def __init__(self):
-        frame2 = wx.Frame(None,-1, "Application Name - Output", size=(500,500))
+        frame2 = wx.Frame(None, -1, "Application Name - Output", size=(500, 500))
         frame2.Show()
         self.parent = frame2
-        wx.TextCtrl.__init__(self,self.parent,size=(485,460), style=wx.TE_MULTILINE|wx.TE_READONLY| wx.HSCROLL)
+        wx.TextCtrl.__init__(self, self.parent, size=(485, 460), style=wx.TE_MULTILINE | wx.TE_READONLY | wx.HSCROLL)
         sys.stdout = self
         print("=== Ready for output! ===\n")
 
@@ -42,17 +42,17 @@ class MainFrame(wx.Frame):
 
         '''Creating Buttons'''
         Func1 = wx.Button(panel, label="Print all Details", pos=(100, 10), size=(300, 40))
-        Func2 = wx.Button(panel, label="Matched Students", pos=(100, 60), size=(300, 40))
-        Func3 = wx.Button(panel, label="Top 3 Best Matched (Likes/Dislikes)", pos=(100, 110), size=(300, 40))
-        Func4 = wx.Button(panel, label="Top 3 Best Matched (Books)", pos=(100, 160), size=(300, 40))
-        Func5 = wx.Button(panel, label="Top 3 Best Matched (Overall)", pos=(100, 210), size=(300, 40))
+        Func2 = wx.Button(panel, label="Match based on Country", pos=(100, 60), size=(300, 40))
+        Func3 = wx.Button(panel, label="Match based on Likes/Dislikes", pos=(100, 110), size=(300, 40))
+        Func4 = wx.Button(panel, label="Match based on Books", pos=(100, 160), size=(300, 40))
+        Func5 = wx.Button(panel, label="Match based on Overall Profile", pos=(100, 210), size=(300, 40))
         Func6 = wx.Button(panel, label="Output Top 3 Matches to CSV", pos=(100, 260), size=(300, 40))
 
         ExitButton = wx.Button(panel, label="Exit", pos=(210, 400), size=(80, 30))
 
         '''Binding buttons to actions'''
         self.Bind(wx.EVT_BUTTON, self.List_All_Details, Func1)
-        self.Bind(wx.EVT_BUTTON, self.Func2, Func2)
+        self.Bind(wx.EVT_BUTTON, self.Country_Matches, Func2)
         self.Bind(wx.EVT_BUTTON, self.Likes_Matches, Func3)
         self.Bind(wx.EVT_BUTTON, self.Books_Matches, Func4)
         self.Bind(wx.EVT_BUTTON, self.Overall_Matches, Func5)
@@ -95,18 +95,13 @@ class MainFrame(wx.Frame):
         OutputWindow()
         List_All_Details(folder_path)
 
-    def Func2(self, event):
-        """
-        #Rename this function to Country_Matches
-        self.name_prompt = wx.TextEntryDialog(None, message="Enter your name:", caption="Application Name", value="Kevin")
+    def Country_Matches(self, event):
+        self.name_prompt = wx.TextEntryDialog(None, message="Enter your name:", caption="Application Name", value="")
         if self.name_prompt.ShowModal() == wx.ID_OK:
             global name
             name = self.name_prompt.GetValue()  # Gets string input by user and assign it to folder_path
             OutputWindow()
-            Func2(folder_path, name)
-        """
-        OutputWindow()
-        Func2()
+            Country_Matches(folder_path, name)
 
     def Likes_Matches(self, event):
         self.name_prompt = wx.TextEntryDialog(None, message="Enter your name:", caption="Application Name", value="")

@@ -2,7 +2,7 @@
 Python File: function2.py
 Author: Goh Jun Yan
 """
-from main import run as getData
+from function1 import run as getData
 
 
 def list_matched_country(value, data_list, id_or_name=1):
@@ -106,12 +106,13 @@ def list_matched_country(value, data_list, id_or_name=1):
     return matched_users
 
 
-def main():
+def main(folder_path, name):
     # Get data dynamically based on the profiles listed from filepath
-    sample_list = getData('./profiles/')
+    sample_list = getData(folder_path)
     # list_matched_country(Name(str), data input(list), id or name output type(0->id, 1->Name)(default value->1))
-    print list_matched_country("Kevin", sample_list)
-
+    output_list = list_matched_country(name, sample_list)
+    print("You matched with the following based on your countries: ")
+    print("\n".join(output_list))
 
 if __name__ == '__main__':
     main()

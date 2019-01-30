@@ -1,6 +1,6 @@
 import wx
 from os import walk
-from main import *
+from function1 import *
 from mainTest import *
 
 
@@ -55,7 +55,7 @@ class AppFrame(wx.Frame):
         mainTest()
         #list_of_dictionary_profiles_data = run("./profiles/")
         #print(list_of_dictionary_profiles_data)
-    # main.py code goes somewhere here
+    # function1.py code goes somewhere here
 
 
 if __name__ == "__main__":

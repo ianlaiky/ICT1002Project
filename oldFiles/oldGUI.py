@@ -40,7 +40,7 @@ class MyFrame(wx.Frame):
         folder_path = self.txt.GetValue()       #Gets string input by user and assign it to folder_path
         folder_path.lower()                     #change folder_path to lowercase to avoid collisions
 
-    #main.py code goes somewhere here
+    #function1.py code goes somewhere here
 
 if __name__ == "__main__":
     app = wx.App(True)

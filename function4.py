@@ -6,7 +6,7 @@ Last Modified: 29/01/2019
 Requires: FuzzyWuzzy Lib, Levenshtein Libraries and functions from main
 """
 
-from main import run as getData
+from function1 import run as getData
 from fuzzywuzzy import fuzz
 import operator
 

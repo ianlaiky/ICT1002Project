@@ -7,7 +7,7 @@ Requires: FuzzyWuzzy Lib, Levenshtein Libraries and in-built libraries from func
 """
 from fuzzywuzzy import fuzz
 from function4 import best3, id_to_names, profile_elimination
-from main import run as getData
+from function1 import run as getData
 
 
 def likes(id_list, input_list):

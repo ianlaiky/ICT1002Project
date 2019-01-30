@@ -6,7 +6,7 @@ Last Modified: 29/01/2019
 Requires: In-built libraries from Function 2,3,4 and main
 """
 
-from main import run as getData
+from function1 import run as getData
 from function2 import list_matched_country
 from function3 import func3
 from function4 import func4, best3, id_to_names

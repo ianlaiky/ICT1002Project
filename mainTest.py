@@ -1,4 +1,4 @@
-from main import run as main
+from function1 import run as main
 
 
 def mainTest(path):

@@ -1,4 +1,4 @@
-from main import run as getData
+from function1 import run as getData
 from function4 import func4
 
 def main():
