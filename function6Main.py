@@ -1,10 +1,10 @@
 import function6
-import main
+import function1
 import function5
 
 
 def get_all_userProfile(folder_path):
-    return main.run(folder_path)
+    return function1.run(folder_path)
 
 
 def append_data(data):

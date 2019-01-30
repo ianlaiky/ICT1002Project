@@ -6,6 +6,7 @@ from function2 import main as Country_Matches
 from function3 import main as Likes_Matches
 from function4 import main as Books_Matches
 from function5 import main as Overall_Matches
+from function6Main import run as OutputCSV
 
 
 class OutputWindow(wx.TextCtrl):
@@ -56,7 +57,7 @@ class MainFrame(wx.Frame):
         self.Bind(wx.EVT_BUTTON, self.Likes_Matches, Func3)
         self.Bind(wx.EVT_BUTTON, self.Books_Matches, Func4)
         self.Bind(wx.EVT_BUTTON, self.Overall_Matches, Func5)
-        #self.Bind(wx.EVT_BUTTON, self.Func6, Func6)
+        self.Bind(wx.EVT_BUTTON, self.OutputCSV, Func6)
         #self.Bind(wx.EVT_BUTTON,self.Func7, Func7)
         self.Bind(wx.EVT_BUTTON, self.exitButton, ExitButton)
         self.Bind(wx.EVT_CLOSE, self.exitWindow)
@@ -127,9 +128,9 @@ class MainFrame(wx.Frame):
             OutputWindow()
             Overall_Matches(folder_path, name)
 
-    #def Func6(self,event):
-        #OutputWindow()
-        #Func6()
+    def OutputCSV(self,event):
+        OutputWindow()
+        OutputCSV(folder_path)
 
 if __name__ == "__main__":
     app = wx.App(False)         # <--- Set to False to output to console, True to output to popup window
