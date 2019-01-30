@@ -30,8 +30,8 @@ def run(folder_path):
     function6.clear_file()
     profileList = get_all_userProfile(folder_path)
     append_data(["Name", "Match with"])
-    for i in profileList:
+    for index,i in enumerate(profileList):
         # print i["Name"]
         # print function5.func5(i["Name"], profileList)
-
+        print str(int(index)+1)+" of "+str(len(profileList))+" done!"
         append_data([i["Name"], ', '.join(function5.func5(i["Name"], profileList)).replace(",", " |")])
