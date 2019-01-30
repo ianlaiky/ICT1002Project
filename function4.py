@@ -193,10 +193,12 @@ def func4(name, input_list, OUTPUT_FLAG=0):
         print "No such user %s, please try again!" %name #if name does not exist, print this
 
 
-def main():
+def main(folder_path,name):
     # Get data dynamically based on the profiles listed from filepath
-    sample_list = getData('./profiles/')
-    print func4('Joel Jackson', sample_list, 1)
+    sample_list = getData(folder_path)
+    output_list = func4(name, sample_list)
+    print("You matched with the following based on your favourite books: ")
+    print("\n".join(output_list))
 
 
 if __name__ == '__main__':

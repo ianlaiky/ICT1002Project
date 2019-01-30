@@ -159,31 +159,12 @@ def func3(name, inputlist, OUTPUT_FLAG=0):
         print "No such user %s, please try again!" %name #if name does not exist, print this
 
 
-def main():
+def main(folder_path, name):
     # Get data dynamically based on the profiles listed from filepath
-    sample_list = getData('./profiles/')
-    print "For Michael:"
-    print func3('Michael Jackson', sample_list)
-    print "\nFor Carol:"
-    print func3('Carol', sample_list)
-    print "\nFor Kevin:"
-    print func3('Kevin', sample_list)
-    print "\nFor Rose:"
-    print func3('Rose', sample_list)
-    print "\nFor Shelley:"
-    print func3('Shelley', sample_list)
-    print "\nFor Joel:"
-    print func3('Joel Jackson', sample_list)
-    print "\nFor Jenny:"
-    print func3('Jenny Wang', sample_list)
-    print "\nFor Angela:"
-    print func3('Angela Little', sample_list)
-    print "\nFor Lisa:"
-    print func3('Lisa Marie', sample_list)
-    print "\nFor Teresa:"
-    print func3('Teresa', sample_list)
-    print func3('Michael Jackson', sample_list, 1)
-
+    sample_list = getData(folder_path)
+    output_list = func3(name, sample_list)
+    print("You matched with the following based on your likes and dislikes: ")
+    print("\n".join(output_list))
 
 if __name__ == '__main__':
     main()
