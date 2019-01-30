@@ -24,25 +24,7 @@ def func5(user_name, input_list):
     ids_match_country = list_matched_country(user_name, input_list, 1) #get list of ids which best matches based on id
     interest_based_data = func3(user_name, input_list, 1)#get id and scores which matches user based on interests
     books_based_data = func4(user_name, input_list, 1) #get id and scores which matches user based on books
-    gender_of_user = "" #stores gender of user locally to be used later
     score_dict = {} #scores assigned to id
-
-    """
-    TODO: Remove when Jun Yan is done sleeping
-    Currently placed here for Jun Yan to do on his part
-    To get the gender of the user
-    """
-    for profile in input_list:
-        if profile["Name"] == user_name: #if user name matches name in list
-            gender_of_user = profile["Gender"] #set it as local var
-            break
-    """
-    Given the gender of the user, iterate through list of ids which matches country
-    Only leave opposite gender in list
-    """
-    for profile in input_list:
-        if profile["id"] in ids_match_country and gender_of_user == profile["gender"]: #if id is in matched_country_list and matches gender of user
-            ids_match_country.remove(profile["id"]) #remove it from the list
 
     """
     Iterate through the datasets and add up the score based on user_id
