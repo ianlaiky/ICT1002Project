@@ -1,11 +1,12 @@
 import sys
 import wx
 import os
+from mainTest import mainTest as list_all_details
 from function2 import main as Func2
 from function3 import main as Func3
 from function4_testing import main as Func4
 from function5 import main as Func5
-from mainTest import mainTest
+
 
 
 class OutputWindow(wx.TextCtrl):
@@ -51,7 +52,7 @@ class MainFrame(wx.Frame):
         ExitButton = wx.Button(panel, label="Exit", pos=(210, 400), size=(80, 30))
 
         '''Binding buttons to actions'''
-        self.Bind(wx.EVT_BUTTON, self.Func1, Func1)
+        self.Bind(wx.EVT_BUTTON, self.List_All_Details, Func1)
         self.Bind(wx.EVT_BUTTON, self.Func2, Func2)
         self.Bind(wx.EVT_BUTTON, self.Func3, Func3)
         self.Bind(wx.EVT_BUTTON, self.Func4, Func4)
@@ -70,6 +71,7 @@ class MainFrame(wx.Frame):
             if self.folderPrompt.ShowModal() == wx.ID_OK:
                 global folder_path
                 folder_path = self.folderPrompt.GetValue()  # Gets string input by user and assign it to folder_path
+
                 if os.path.isdir(folder_path):
                     wx.MessageBox("Directory Verified", "Info", wx.OK | wx.ICON_INFORMATION)
                     break
@@ -90,11 +92,19 @@ class MainFrame(wx.Frame):
             sys.exit()
         dlg.Destroy()
 
-    def Func1(self, event):
+    def List_All_Details(self, event):
         OutputWindow()
-        mainTest(folder_path)
+        list_all_details(folder_path)
 
     def Func2(self, event):
+        """
+        self.name_prompt = wx.TextEntryDialog(None, message="Enter your name:", caption="Application Name", value="Kevin")
+        if self.name_prompt.ShowModal() == wx.ID_OK:
+            global name
+            name = self.name_prompt.GetValue()  # Gets string input by user and assign it to folder_path
+            OutputWindow()
+            Func2(folder_path, name)
+        """
         OutputWindow()
         Func2()
 

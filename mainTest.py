@@ -13,17 +13,17 @@ def mainTest(path):
 
         print "Country: ", i["Country"]
 
-        print "Acceptable_country: ", i["Acceptable_country"]
+        print "Acceptable Countries: ", ", ".join(i["Acceptable_country"])
 
         print "Age: ", i["Age"]
 
-        print "Acceptable_age_range: ", i["Acceptable_age_range"]
+        print "Acceptable Age Range: ", i["Acceptable_age_range"]
 
-        print "Likes: ", i["Likes"]
+        print "Likes: ", ", ".join(i["Likes"])
 
-        print "Dislikes: ", i["Dislikes"]
+        print "Dislikes: ", ", ".join(i["Dislikes"])
 
-        print "Books:", i["Books"]
+        print "Books: \n", "\n".join(i["Books"])
 
         print "\n"
         print "----------------------------------------------------------------------------------------------------------------------------"
