@@ -82,11 +82,6 @@ def id_to_names(id_list, input_list):
     :param input_list: @list -> list of profiles
     :return: name_list: @list -> list of converted names
     """
-    """
-    Convert ids to names
-    Takes in list of ids and dictionary of profiles
-    Returns list of names
-    """
 
     """Initialization of func var"""
     name_list = []
@@ -99,8 +94,29 @@ def id_to_names(id_list, input_list):
 
     return name_list
 
+def profile_elimination(gender_of_user, youngest_age, oldest_age, input_list):
+    """
+    Eliminates profiles based on user's acceptable age range and gender
+    :param gender_of_user: @str -> gender of user
+    :param youngest_age: @int -> youngest acceptable age by user
+    :param oldest_age: @int -> oldest acceptable age by user
+    :param input_list: @list -> list of profiles
+    :return: id_list_to_ignore: @list -> list of ids that suit acceptable age range and opp gender
+    """
 
-def func4(name, input_list, OUTPUT_FLAG):
+    id_list_to_ignore = [] #puts the value of user ids into the list of ids to be ignored
+
+    for profile in input_list:
+        if profile['Gender'] == gender_of_user:
+            id_list_to_ignore.append(profile['id'])
+            hi = int(profile['Age'])
+        elif not int(profile['Age']) in xrange(youngest_age, oldest_age+1):
+            id_list_to_ignore.append(profile['id'])
+
+    return id_list_to_ignore
+
+
+def func4(name, input_list, OUTPUT_FLAG=0):
     """
     Based on user's general interests and disinterests, give out 3 most suited candidates for matching or return whole dataset
     :param name: @string -> username given by user
@@ -117,8 +133,10 @@ def func4(name, input_list, OUTPUT_FLAG):
     try:
         """Initialize function var"""
         books_of_user = []  # used to get books from given user
-        list_of_ids = []  # stores list of ids inclu. id of given user and ids of same gender to avoid
         gender_of_user = ''  # store gender of user so can avoid those profiles
+        id_of_user = '' #store id of user as a func var
+        youngest_acceptable_age = 0 #youngest age that can be accepted by given user
+        oldest_acceptable_age = 0 #oldest age that can be accepted by given user
 
         """
         Iterate through profiles to get
@@ -127,21 +145,17 @@ def func4(name, input_list, OUTPUT_FLAG):
         for profile in input_list:
             if name == profile['Name']:  # if matches username
                 books_of_user = profile['Books'][:]  # get book list and store as func var
-                list_of_ids.append(profile['id'])  # store id into func var
+                id_of_user = profile['id'] #gets id of user to ignore
+                acceptable_age_list = list(profile['Acceptable_age_range'].split('-')) #gets age range and store as range of numbers
+                youngest_acceptable_age  = int(acceptable_age_list[0])#gets the youngest age
+                oldest_acceptable_age = int(acceptable_age_list[1])  #gets the oldest age
                 gender_of_user = profile['Gender']  # store gender as func var
 
         """Error Checking for names, to see if name exist"""
-        if len(list_of_ids) != 1: #if there is no match of ids to the ids in the dataset
+        if id_of_user == '': #if there is no match of ids to the ids in the dataset
             raise ValueError
 
-        """
-        Wow this might be pretty inefficient
-        Re-iterate through profiles to get 
-        all ids of same gender as given user
-        """
-        for profile in input_list:
-            if gender_of_user == profile['Gender']:  # if the gender matches that of user
-                list_of_ids.append(profile['id'])  # add id to list to be ignored
+        list_of_ids = profile_elimination(gender_of_user, youngest_acceptable_age, oldest_acceptable_age, input_list)
 
         """
         Get all the books except those belonging to user

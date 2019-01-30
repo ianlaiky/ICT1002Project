@@ -6,7 +6,7 @@ Last Modified: 29/01/2019
 Requires: FuzzyWuzzy Lib, Levenshtein Libraries and in-built libraries from function 4 and main
 """
 from fuzzywuzzy import fuzz
-from function4 import best3
+from function4 import best3, id_to_names, profile_elimination
 from main import run as getData
 
 
@@ -93,30 +93,6 @@ def cmp_likes(user_likes_list, cmp_likes_dict, user_dislikes_list, cmp_dislikes_
 
     return total_rating_dict
 
-def id_to_names(id_list, input_list):
-    """
-    Take list of ids and convert to names
-    :param id_list: @list -> list of ids
-    :param input_list: @list -> list of profiles
-    :return: name_list: @list -> list of names
-    """
-    """
-    Convert ids to names
-    Takes in list of ids and dictionary of profiles
-    Returns list of names
-    """
-
-    """Initialization of func var"""
-    name_list = []
-
-    """Iterate through list of profile to get names"""
-    for x in xrange(len(id_list)):  # for each element in asc index
-        for profile in input_list:
-            if profile['id'] == id_list[x]:  # if id matches that in list of specific index
-                name_list.append(profile['Name'])  # put this into list to be returned
-
-    return name_list
-
 
 def func3(name, inputlist, OUTPUT_FLAG=0):
     """
@@ -130,21 +106,26 @@ def func3(name, inputlist, OUTPUT_FLAG=0):
         """Initialize function var"""
         likes_of_user = []  # used to get likes from given user
         dislikes_of_user = [] # same as above but for dislikes
-        list_of_ids = []  # stores list of ids inclu. id of given user and ids of same gender to avoid
-        gender_of_user = ''  # store gender of user so can avoid those profiles
+        id_of_user = ''  # store id of user as a func var
+        youngest_acceptable_age = 0  # youngest age that can be accepted by given user
+        oldest_acceptable_age = 0  # oldest age that can be accepted by given user
 
 
         for profile in inputlist:
             if name == profile['Name']:  # if matches username
                 likes_of_user = profile['Likes'][:]  # get likes and store as func var
                 dislikes_of_user = profile["Dislikes"][:] #get dislikes and store as func var
-                list_of_ids.append(profile['id'])  # store id into func var
+                id_of_user = profile['id']  # gets id of user to ignore
+                acceptable_age_list = list(profile['Acceptable_age_range'].split('-'))  # gets age range and store as range of numbers
+                youngest_acceptable_age = int(acceptable_age_list[0])  # gets the youngest age
+                oldest_acceptable_age = int(acceptable_age_list[1])  # gets the oldest age
                 gender_of_user = profile['Gender']  # store gender as func var
 
+        """Error Checking for names, to see if name exist"""
+        if id_of_user == '':  # if there is no match of ids to the ids in the dataset
+            raise ValueError
 
-        for profile in inputlist:
-            if gender_of_user == profile['Gender']:  # if the gender matches that of user
-                list_of_ids.append(profile['id'])  # add id to list to be ignored
+        list_of_ids = profile_elimination(gender_of_user, youngest_acceptable_age, oldest_acceptable_age, inputlist)
 
         """
         Get both the likes and dislikes of users and store in a dict
