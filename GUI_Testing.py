@@ -7,6 +7,7 @@ from function3 import main as Likes_Matches
 from function4 import main as Books_Matches
 from function5 import main as Overall_Matches
 from function6Main import run as OutputCSV
+from CreateNew import main as Create_New_Profile
 
 
 class OutputWindow(wx.TextCtrl):
@@ -48,6 +49,7 @@ class MainFrame(wx.Frame):
         Func4 = wx.Button(panel, label="Match based on Books", pos=(100, 160), size=(300, 40))
         Func5 = wx.Button(panel, label="Match based on Overall Profile", pos=(100, 210), size=(300, 40))
         Func6 = wx.Button(panel, label="Output Top 3 Matches to CSV", pos=(100, 260), size=(300, 40))
+        Func7 = wx.Button(panel, label="Create New Profile", pos=(100, 310), size=(300, 40))
 
         ExitButton = wx.Button(panel, label="Exit", pos=(210, 400), size=(80, 30))
 
@@ -58,7 +60,7 @@ class MainFrame(wx.Frame):
         self.Bind(wx.EVT_BUTTON, self.Books_Matches, Func4)
         self.Bind(wx.EVT_BUTTON, self.Overall_Matches, Func5)
         self.Bind(wx.EVT_BUTTON, self.OutputCSV, Func6)
-        #self.Bind(wx.EVT_BUTTON,self.Func7, Func7)
+        self.Bind(wx.EVT_BUTTON, self.CreateNewProfile, Func7)
         self.Bind(wx.EVT_BUTTON, self.exitButton, ExitButton)
         self.Bind(wx.EVT_CLOSE, self.exitWindow)
 
@@ -128,13 +130,16 @@ class MainFrame(wx.Frame):
             OutputWindow()
             Overall_Matches(folder_path, name)
 
-    def OutputCSV(self,event):
+    def OutputCSV(self, event):
         OutputWindow()
         OutputCSV(folder_path)
 
+    def CreateNewProfile(self, event):
+        Create_New_Profile()
+
 if __name__ == "__main__":
-    app = wx.App(False)         # <--- Set to False to output to console, True to output to popup window
-    frame = MainFrame(parent=None, id=-1)
-    frame.Show()
-    app.MainLoop()
+    MainApp = wx.App(False)         # <--- Set to False to output to console, True to output to popup window
+    Mainframe = MainFrame(parent=None, id=-1)
+    Mainframe.Show()
+    MainApp.MainLoop()
     sys.stdout = sys.__stdout__
