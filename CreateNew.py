@@ -1,15 +1,21 @@
+"""
+Python File: CreateNew.py
+Author: Toh Wei Hao Nicholas
+"""
+
 import wx
-import wx.xrc
 import re
 import time
 
 
-class MainFrame(wx.Frame):
+class RegFrame(wx.Frame):
 
-    def __init__(self, parent):
+    def __init__(self, parent, path):
         wx.Frame.__init__(self, parent, title="Application Name", pos=wx.DefaultPosition, size=wx.Size(500, 500),
                           style=wx.DEFAULT_FRAME_STYLE | wx.TAB_TRAVERSAL)
         self.parent = parent
+        global folder_path
+        folder_path = path
         self.SetSizeHints(wx.DefaultSize, wx.DefaultSize)
 
         Sizer = wx.FlexGridSizer(0, 2, 0, 0)
@@ -221,7 +227,16 @@ class MainFrame(wx.Frame):
         if len(acceptable_country) == 0:
             acceptable_country.append("Any")
         acceptable_country = ", ".join(acceptable_country)
-        age = str(int(self.AgeField.GetValue()))
+
+        age = self.AgeField.GetValue()
+        while True:
+            if re.match("\d\d", age):
+                int(age)
+                break
+            else:
+                dlg = wx.MessageBox("Error: Invalid Age!", "Error", wx.OK | wx.ICON_ERROR)
+                if dlg == wx.OK:
+                    return
 
         acceptable_age_range = self.AcceptableAgeRangeField.GetValue()
         while True:
@@ -240,8 +255,8 @@ class MainFrame(wx.Frame):
 
     def write_to_file(self):
         try:
-            timestr = time.strftime("%Y%m%d-%H%M%S")
-            filename = "NewProfile" + timestr + ".txt"
+            timestr = time.strftime("%Y%m%d-%H%M%S")                          #Generates the current datetime
+            filename = folder_path + "NewProfile" + timestr + ".txt"          #Combines to form a unique filename
             f = open(filename, "w+")
             f.write("Name: " + name)
             f.write("\nGender: " + gender)
@@ -263,11 +278,11 @@ class MainFrame(wx.Frame):
             if dlg == wx.OK:
                 return
 
-def main():
+def main(folder_path):
     app = wx.App(False)
-    frame = MainFrame(None)
+    frame = RegFrame(None, folder_path)
     frame.Show()
     app.MainLoop()
 
 
-#main()
+#main("./profiles/")

@@ -1,3 +1,8 @@
+"""
+Python File: GUI.py
+Author: Toh Wei Hao Nicholas
+"""
+
 import sys
 import wx
 import os
@@ -20,7 +25,6 @@ class OutputWindow(wx.TextCtrl):
         self.parent = frame2
         wx.TextCtrl.__init__(self, self.parent, size=(485, 460), style=wx.TE_MULTILINE | wx.TE_READONLY | wx.HSCROLL)
         sys.stdout = self
-        print("=== Ready for output! ===\n")
 
 
 class AppPanel(wx.Panel):
@@ -99,46 +103,87 @@ class MainFrame(wx.Frame):
         List_All_Details(folder_path)
 
     def Country_Matches(self, event):
-        self.name_prompt = wx.TextEntryDialog(None, message="Enter your name:", caption="Application Name", value="")
-        if self.name_prompt.ShowModal() == wx.ID_OK:
-            global name
-            name = self.name_prompt.GetValue()  # Gets string input by user and assign it to folder_path
-            OutputWindow()
-            Country_Matches(folder_path, name)
+        while True:
+            name_prompt = wx.TextEntryDialog(None, message="Enter your name:", caption="Application Name", value="")
+            if name_prompt.ShowModal() == wx.ID_OK:
+                global name
+                name = name_prompt.GetValue()
+                if len(name) == 0:
+                    dlg = wx.MessageBox("Error: Please enter your name!", "Error", wx.OK | wx.ICON_ERROR)
+                else:
+                    OutputWindow()
+                    Country_Matches(folder_path, name)
+                    break
+            else:
+                break
 
     def Likes_Matches(self, event):
-        self.name_prompt = wx.TextEntryDialog(None, message="Enter your name:", caption="Application Name", value="")
-        if self.name_prompt.ShowModal() == wx.ID_OK:
-            global name
-            name = self.name_prompt.GetValue()  # Gets string input by user and assign it to folder_path
-            OutputWindow()
-            Likes_Matches(folder_path, name)
+        while True:
+            name_prompt = wx.TextEntryDialog(None, message="Enter your name:", caption="Application Name", value="")
+            if name_prompt.ShowModal() == wx.ID_OK:
+                global name
+                name = name_prompt.GetValue()
+                if len(name) == 0:
+                    dlg = wx.MessageBox("Error: Please enter your name!", "Error", wx.OK | wx.ICON_ERROR)
+                else:
+                    OutputWindow()
+                    Likes_Matches(folder_path, name)
+                    break
+            else:
+                break
 
     def Books_Matches(self, event):
-        self.name_prompt = wx.TextEntryDialog(None, message="Enter your name:", caption="Application Name", value="")
-        if self.name_prompt.ShowModal() == wx.ID_OK:
-            global name
-            name = self.name_prompt.GetValue()  # Gets string input by user and assign it to folder_path
-            OutputWindow()
-            Books_Matches(folder_path, name)
+        while True:
+            name_prompt = wx.TextEntryDialog(None, message="Enter your name:", caption="Application Name", value="")
+            if name_prompt.ShowModal() == wx.ID_OK:
+                global name
+                name = name_prompt.GetValue()
+                if len(name) == 0:
+                    dlg = wx.MessageBox("Error: Please enter your name!", "Error", wx.OK | wx.ICON_ERROR)
+                else:
+                    OutputWindow()
+                    Books_Matches(folder_path, name)
+                    break
+            else:
+                break
 
     def Overall_Matches(self, event):
-        self.name_prompt = wx.TextEntryDialog(None, message="Enter your name:", caption="Application Name", value="")
-        if self.name_prompt.ShowModal() == wx.ID_OK:
-            global name
-            name = self.name_prompt.GetValue()  # Gets string input by user and assign it to folder_path
-            OutputWindow()
-            Overall_Matches(folder_path, name)
+        while True:
+            name_prompt = wx.TextEntryDialog(None, message="Enter your name:", caption="Application Name", value="")
+            if name_prompt.ShowModal() == wx.ID_OK:
+                global name
+                name = name_prompt.GetValue()
+                if len(name) == 0:
+                    dlg = wx.MessageBox("Error: Please enter your name!", "Error", wx.OK | wx.ICON_ERROR)
+                else:
+                    OutputWindow()
+                    Overall_Matches(folder_path, name)
+                    break
+            else:
+                break
 
     def OutputCSV(self, event):
-        OutputWindow()
-        OutputCSV(folder_path)
+        try:
+            OutputWindow()
+            OutputCSV(folder_path)
+        except (Exception):
+            dlg = wx.MessageBox("Error: An Unexpected Error occurred. \n"
+                                "Please try again later.", "Error", wx.OK | wx.ICON_ERROR)
+            if dlg == wx.OK:
+                return
 
     def CreateNewProfile(self, event):
-        Create_New_Profile()
+        try:
+            Create_New_Profile(folder_path)
+        except (Exception):
+            dlg = wx.MessageBox("Error: An Unexpected Error occurred. \n"
+                                "Please try again later.", "Error", wx.OK | wx.ICON_ERROR)
+            if dlg == wx.OK:
+                return
+
 
 if __name__ == "__main__":
-    MainApp = wx.App(False)         # <--- Set to False to output to console, True to output to popup window
+    MainApp = wx.App(False)
     Mainframe = MainFrame(parent=None, id=-1)
     Mainframe.Show()
     MainApp.MainLoop()
