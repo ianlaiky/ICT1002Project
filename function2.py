@@ -80,11 +80,14 @@ def list_matched_country(value, data_list, id_or_name=1):
             # Ignore the same sex
             elif other_user['Gender'] == user_gender:
                 continue
-            # Match user's acceptable countries with other_user's country
-            elif other_user['Country'] == user_acceptable_country_str:
-                # If other_user's age falls in between the acceptable age range of the selected user
-                if min(acceptable_age_list) <= int(other_user['Age']) <= max(acceptable_age_list):
+            # If other_user's age falls in between the acceptable age range of the selected user
+            elif min(acceptable_age_list) <= int(other_user['Age']) <= max(acceptable_age_list):
+                # Match user's acceptable countries with other_user's country
+                if other_user['Country'] == user_acceptable_country_str:
                     # Appending matched other_user to the matched_users list
+                    matched_users.append(other_user[output_type])
+                # Match user to other_user of any country if user's acceptable country is 'any'
+                if user_acceptable_country_str == 'any':
                     matched_users.append(other_user[output_type])
     # If User_acceptable_country is stored as a list
     elif str_or_list == 1:
@@ -96,10 +99,13 @@ def list_matched_country(value, data_list, id_or_name=1):
                 # Ignore the same sex
                 elif other_user['Gender'] == user_gender:
                     continue
-                # Match user's acceptable countries with other_user's country
-                elif other_user['Country'] == country:
-                    # If other_user's age falls in between the acceptable age range of the selected user
-                    if min(acceptable_age_list) <= int(other_user['Age']) <= max(acceptable_age_list):
+                # If other_user's age falls in between the acceptable age range of the selected user
+                elif min(acceptable_age_list) <= int(other_user['Age']) <= max(acceptable_age_list):
+                    # Match user's acceptable countries with other_user's country
+                    if other_user['Country'] == country:
+                        # Appending matched other_user to the matched_users list
+                        matched_users.append(other_user[output_type])
+                    if user_acceptable_country_str == 'any':
                         # Appending matched other_user to the matched_users list
                         matched_users.append(other_user[output_type])
 
@@ -113,6 +119,7 @@ def main(folder_path, name):
     output_list = list_matched_country(name, sample_list)
     print("You matched with the following based on your countries: ")
     print("\n".join(output_list))
+
 
 if __name__ == '__main__':
     main()
