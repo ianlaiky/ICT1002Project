@@ -8,6 +8,7 @@ Requires: FuzzyWuzzy Lib, Levenshtein Libraries and in-built libraries from func
 from fuzzywuzzy import fuzz
 from function4 import best3, id_to_names, profile_elimination
 from function1 import run as getData
+import wx
 
 
 def likes(id_list, input_list):
@@ -156,15 +157,18 @@ def func3(name, inputlist, OUTPUT_FLAG=0):
             return list_of_profile_names
 
     except ValueError:
-        print "No such user %s, please try again!" %name #if name does not exist, print this
+        wx.MessageBox("Error: No such user. Please try again!", "Error", wx.OK | wx.ICON_ERROR)
 
 
 def main(folder_path, name):
     # Get data dynamically based on the profiles listed from filepath
     sample_list = getData(folder_path)
     output_list = func3(name, sample_list)
-    print("You matched with the following based on your likes and dislikes: ")
-    print("\n".join(output_list))
+    if ValueError:
+        pass
+    else:
+        print("Your Top 3 Matches based on your likes and dislikes: ")
+        print("\n".join(output_list))
 
 if __name__ == '__main__':
     main()

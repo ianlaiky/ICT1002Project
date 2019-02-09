@@ -9,6 +9,7 @@ Requires: FuzzyWuzzy Lib, Levenshtein Libraries and functions from main
 from function1 import run as getData
 from fuzzywuzzy import fuzz
 import operator
+import wx
 
 def all_books(id_list, input_list):
     """
@@ -190,15 +191,18 @@ def func4(name, input_list, OUTPUT_FLAG=0):
             return list_of_profile_names
 
     except ValueError:
-        print "No such user %s, please try again!" %name #if name does not exist, print this
+        wx.MessageBox("Error: No such user. Please try again!", "Error", wx.OK | wx.ICON_ERROR)
 
 
 def main(folder_path,name):
     # Get data dynamically based on the profiles listed from filepath
     sample_list = getData(folder_path)
     output_list = func4(name, sample_list)
-    print("You matched with the following based on your favourite books: ")
-    print("\n".join(output_list))
+    if ValueError:
+        pass
+    else:
+        print("Your Top 3 matches based on your favourite books: ")
+        print("\n".join(output_list))
 
 
 if __name__ == '__main__':

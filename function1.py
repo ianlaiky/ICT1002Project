@@ -191,8 +191,11 @@ def run(folder_Path):
     """
 
     files_in_folder = readFolder(folder_Path)
+    if len(files_in_folder) == 0:
+        raise IndexError
     list_of_dictionary_profiles_data = convertFileListToProfileList(folder_Path, files_in_folder)
-
+    if len(list_of_dictionary_profiles_data) == 0:
+        raise IndexError
     return list_of_dictionary_profiles_data
 
 
@@ -200,7 +203,7 @@ def main(folder_path):
     list_of_dictionary_profiles_data = run(folder_path)
 
     for i in list_of_dictionary_profiles_data:
-        print "Unique Id: ", i["id"]
+        print "Unique Id: ", (i["id"]+1)
 
         print "Name: ", i["Name"]
 

@@ -45,11 +45,11 @@ def func5(user_name, input_list):
     return list_of_names
 
 
-def main(folder_path,name):
+def main(folder_path, name):
     # Get data dynamically based on the profiles listed from filepath
     sample_list = getData(folder_path)
     output_list = func5(name, sample_list)
-    print("You matched with the following based on your overall profiles: ")
+    print("Your Top 3 matches based on your overall profiles: ")
     print("\n".join(output_list))
 
 

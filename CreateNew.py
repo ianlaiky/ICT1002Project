@@ -22,26 +22,28 @@ class RegFrame(wx.Frame):
         Sizer.SetFlexibleDirection(wx.BOTH)
         Sizer.SetNonFlexibleGrowMode(wx.FLEX_GROWMODE_SPECIFIED)
 
-        self.NameLabel = wx.StaticText(self, wx.ID_ANY, u"Name:", wx.DefaultPosition, wx.DefaultSize, 0, "Name:")
+        ''' Setting up New Profile Form '''
+        self.NameLabel = wx.StaticText(self, wx.ID_ANY, label="Name:", pos=wx.DefaultPosition, size=wx.DefaultSize)
         self.NameLabel.Wrap(-1)
 
         Sizer.Add(self.NameLabel, 0, wx.ALL, 5)
 
-        self.NameField = wx.TextCtrl(self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size(200, -1), 0)
+        self.NameField = wx.TextCtrl(self, wx.ID_ANY, value="", pos=wx.DefaultPosition, size=wx.Size(200, -1))
         Sizer.Add(self.NameField, 0, wx.ALL, 5)
 
-        self.GenderLabel = wx.StaticText(self, wx.ID_ANY, u"Gender:", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.GenderLabel = wx.StaticText(self, wx.ID_ANY, label="Gender:", pos=wx.DefaultPosition, size=wx.DefaultSize)
         self.GenderLabel.Wrap(-1)
 
         Sizer.Add(self.GenderLabel, 0, wx.ALL, 5)
 
         GenderFieldChoices = ["Male", "Female"]
-        self.GenderField = wx.RadioBox(self, wx.ID_ANY, "wxRadioBox", wx.Point(150, -1), wx.Size(150, -1),
-                                       GenderFieldChoices, 1, wx.RA_SPECIFY_ROWS)
+        self.GenderField = wx.RadioBox(self, wx.ID_ANY, label="Gender", pos=wx.Point(150, -1), size=wx.Size(150, -1),
+                                       choices=GenderFieldChoices, majorDimension=1, style=wx.RA_SPECIFY_ROWS)
         self.GenderField.SetSelection(0)
         Sizer.Add(self.GenderField, 0, wx.ALL, 5)
 
-        self.CountryLabel = wx.StaticText(self, wx.ID_ANY, u"Your Country:", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.CountryLabel = wx.StaticText(self, wx.ID_ANY, label="Your Country:", pos=wx.DefaultPosition,
+                                          size=wx.DefaultSize)
         self.CountryLabel.Wrap(-1)
 
         Sizer.Add(self.CountryLabel, 0, wx.ALL, 5)
@@ -105,77 +107,79 @@ class RegFrame(wx.Frame):
                                "US Virgin Islands", "Wallis and Futuna", "Western Sahara", "Yemen", "Zambia",
                                "Zimbabwe"]
 
-        self.CountryField = wx.ComboBox(self, wx.ID_ANY, u"Select Country", wx.DefaultPosition, wx.Size(200, -1),
-                                        CountryFieldChoices, wx.CB_DROPDOWN)
+        self.CountryField = wx.ComboBox(self, wx.ID_ANY, value="Select Country", pos=wx.DefaultPosition,
+                                        size=wx.Size(200, -1), choices=CountryFieldChoices, style=wx.CB_DROPDOWN)
 
         Sizer.Add(self.CountryField, 0, wx.ALL, 5)
 
-        self.AcceptableCountryLabel = wx.StaticText(self, wx.ID_ANY, "Acceptable Countries:", wx.DefaultPosition,
-                                                    wx.DefaultSize, 0)
+        self.AcceptableCountryLabel = wx.StaticText(self, wx.ID_ANY, label="Acceptable Countries:",
+                                                    pos=wx.DefaultPosition, size=wx.DefaultSize)
         self.AcceptableCountryLabel.Wrap(-1)
 
         Sizer.Add(self.AcceptableCountryLabel, 0, wx.ALL, 5)
 
-        self.AcceptableCountryField = wx.ListBox(self, wx.ID_ANY, wx.DefaultPosition, wx.Size(200, 100),
-                                                 CountryFieldChoices, wx.LB_ALWAYS_SB | wx.LB_HSCROLL | wx.LB_MULTIPLE
-                                                 | wx.LB_SORT)
+        self.AcceptableCountryField = wx.ListBox(self, wx.ID_ANY, pos=wx.DefaultPosition, size=wx.Size(200, 100),
+                                                 choices=CountryFieldChoices, style=wx.LB_ALWAYS_SB | wx.LB_HSCROLL |
+                                                 wx.LB_MULTIPLE | wx.LB_SORT)
         self.AcceptableCountryField.SetToolTip("What country's men/women are you looking for?")
         Sizer.Add(self.AcceptableCountryField, 0, wx.ALL, 5)
 
-        self.AgeLabel = wx.StaticText(self, wx.ID_ANY, u"Age:", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.AgeLabel = wx.StaticText(self, wx.ID_ANY, label="Age:", pos=wx.DefaultPosition, size=wx.DefaultSize)
         self.AgeLabel.Wrap(-1)
 
         Sizer.Add(self.AgeLabel, 0, wx.ALL, 5)
 
-        self.AgeField = wx.TextCtrl(self, wx.ID_ANY, "18", wx.DefaultPosition, wx.Size(30, -1), 0)
+        self.AgeField = wx.TextCtrl(self, wx.ID_ANY, value="18", pos=wx.DefaultPosition, size=wx.Size(30, -1))
         self.AgeField.SetMaxLength(2)
         self.AgeField.SetToolTip("Enter your age!")
         Sizer.Add(self.AgeField, 0, wx.ALL, 5)
 
-        self.AcceptableAgeRangeLabel = wx.StaticText(self, wx.ID_ANY, u"Acceptable Age Range:", wx.DefaultPosition,
-                                                     wx.DefaultSize, 0)
+        self.AcceptableAgeRangeLabel = wx.StaticText(self, wx.ID_ANY, label="Acceptable Age Range:",
+                                                     pos=wx.DefaultPosition, size=wx.DefaultSize)
         self.AcceptableAgeRangeLabel.Wrap(-1)
 
         Sizer.Add(self.AcceptableAgeRangeLabel, 0, wx.ALL, 5)
 
-        self.AcceptableAgeRangeField = wx.TextCtrl(self, wx.ID_ANY, "18-26", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.AcceptableAgeRangeField = wx.TextCtrl(self, wx.ID_ANY, value="18-26", pos=wx.DefaultPosition,
+                                                   size=wx.DefaultSize)
         self.AcceptableAgeRangeField.SetMaxLength(5)
         self.AcceptableAgeRangeField.SetToolTip("What's the age range that you are looking for?")
         Sizer.Add(self.AcceptableAgeRangeField, 0, wx.ALL, 5)
 
-        self.LikesLabel = wx.StaticText(self, wx.ID_ANY, u"Likes:", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.LikesLabel = wx.StaticText(self, wx.ID_ANY, label="Likes:", pos=wx.DefaultPosition, size=wx.DefaultSize)
         self.LikesLabel.Wrap(-1)
 
         Sizer.Add(self.LikesLabel, 0, wx.ALL, 5)
 
-        self.LikesField = wx.TextCtrl(self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size(200, -1),
-                                      wx.TE_BESTWRAP)
+        self.LikesField = wx.TextCtrl(self, wx.ID_ANY, value="", pos=wx.DefaultPosition, size=wx.Size(200, -1),
+                                      style=wx.TE_BESTWRAP)
         self.LikesField.SetToolTip("Let others know what do you like! Separate likes by a comma")
 
         Sizer.Add(self.LikesField, 0, wx.ALL, 5)
 
-        self.DislikesLabel = wx.StaticText(self, wx.ID_ANY, u"Dislikes", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.DislikesLabel = wx.StaticText(self, wx.ID_ANY, label="Dislikes", pos=wx.DefaultPosition,
+                                           size=wx.DefaultSize)
         Sizer.Add(self.DislikesLabel, 0, wx.ALL, 5)
 
-        self.DislikesField = wx.TextCtrl(self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size(200, -1),
-                                         wx.TE_BESTWRAP)
+        self.DislikesField = wx.TextCtrl(self, wx.ID_ANY, value="", pos=wx.DefaultPosition, size=wx.Size(200, -1),
+                                         style=wx.TE_BESTWRAP)
         self.DislikesField.SetToolTip("Let others know what do you hate! Separate dislikes by a comma")
         Sizer.Add(self.DislikesField, 0, wx.ALL, 5)
 
-        self.BooksLabel = wx.StaticText(self, wx.ID_ANY, u"Books:", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.BooksLabel = wx.StaticText(self, wx.ID_ANY, label="Books:", pos=wx.DefaultPosition, size=wx.DefaultSize)
         self.BooksLabel.Wrap(-1)
 
         Sizer.Add(self.BooksLabel, 0, wx.ALL, 5)
 
-        self.BooksField = wx.TextCtrl(self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size(200, -1),
-                                      wx.TE_BESTWRAP | wx.TE_MULTILINE)
+        self.BooksField = wx.TextCtrl(self, wx.ID_ANY, value="", pos=wx.DefaultPosition, size=wx.Size(200, -1),
+                                      style=wx.TE_BESTWRAP | wx.TE_MULTILINE)
         self.BooksField.SetToolTip("What's your favourite books? Separate books by a blank line")
 
         Sizer.Add(self.BooksField, 0, wx.ALL, 5)
 
-        Sizer.Add((0, 0), 1, wx.EXPAND, 5)
+        Sizer.Add((0, 0), 1, wx.EXPAND, 5)  #Adding spacer
 
-        SaveButton = wx.Button(self, wx.ID_ANY, u"SAVE", wx.DefaultPosition, wx.DefaultSize, 0)
+        SaveButton = wx.Button(self, wx.ID_ANY, label="SAVE", pos=wx.DefaultPosition, size=wx.DefaultSize)
 
         SaveButton.SetBitmapPosition(wx.BOTTOM)
         Sizer.Add(SaveButton, 0, wx.ALIGN_BOTTOM | wx.ALIGN_CENTER, 5)
@@ -185,13 +189,10 @@ class RegFrame(wx.Frame):
 
         self.Centre(wx.BOTH)
 
-        # Connect Events
+        ''' Bind Button to Action '''
         self.Bind(wx.EVT_BUTTON, self.SaveData, SaveButton)
 
-    def __del__(self):
-        pass
-
-    # Virtual event handlers, overide them in your derived class
+    ''' Capture user input'''
     def SaveData(self, event):
         global name, gender, country, acceptable_country, acceptable_age_range, age, likes, dislikes, books
 
@@ -221,11 +222,17 @@ class RegFrame(wx.Frame):
 
         acceptable_country_index = self.AcceptableCountryField.GetSelections()
         acceptable_country = []
-        for i in acceptable_country_index:
-            x = CountryFieldChoices[i]
-            acceptable_country.append(x)
-        if len(acceptable_country) == 0:
-            acceptable_country.append("Any")
+        while True:
+            for i in acceptable_country_index:
+                x = CountryFieldChoices[i]
+                acceptable_country.append(x)
+            if len(acceptable_country) == 0:
+                dlg = wx.MessageBox("Error: Please select at least 1 acceptable country", "Error", wx.OK | wx.ICON_ERROR)
+                if dlg == wx.OK:
+                    return
+            else:
+                break
+
         acceptable_country = ", ".join(acceptable_country)
 
         age = self.AgeField.GetValue()
@@ -253,10 +260,12 @@ class RegFrame(wx.Frame):
 
         self.write_to_file()
 
+    ''' Save to file '''
     def write_to_file(self):
         try:
-            timestr = time.strftime("%Y%m%d-%H%M%S")                          #Generates the current datetime
-            filename = folder_path + "NewProfile" + timestr + ".txt"          #Combines to form a unique filename
+            timestr = time.strftime("%Y%m%d-%H%M%S")                          # Generates the current datetime
+            filename = folder_path + "NewProfile" + timestr + ".txt"          # Combines to form a unique filename
+
             f = open(filename, "w+")
             f.write("Name: " + name)
             f.write("\nGender: " + gender)
@@ -268,6 +277,7 @@ class RegFrame(wx.Frame):
             f.write("\nDislikes: " + dislikes)
             f.write("\nBooks: \n" + books)
             f.close()
+
             dlg = wx.MessageBox("Profile successfully created!", "Info", wx.OK | wx.ICON_INFORMATION)
             if dlg == wx.OK:
                 self.Destroy()
@@ -277,6 +287,7 @@ class RegFrame(wx.Frame):
                                 "Please try again later.", "Error", wx.OK | wx.ICON_ERROR)
             if dlg == wx.OK:
                 return
+
 
 def main(folder_path):
     app = wx.App(False)

@@ -1,5 +1,5 @@
 """
-Python File: fucntion6.py
+Python File: function6.py
 Author: Ian Lai Kheng Yan
 """
 

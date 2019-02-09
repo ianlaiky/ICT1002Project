@@ -66,11 +66,11 @@ def list_matched_country(value, data_list, id_or_name=1):
     the user acceptable country (str/list). If matched, append the other user's Name(for now) to matched_users list        
     """
     if user_index == -1:
-        print "Error: (Function 2)Unable to get user index"
+        raise IndexError
     elif user_gender == "":
-        print "Error: (Function 2)Unable to retrieve gender of user"
+        raise Exception
     elif str_or_list == -1:
-        print "Error: (Function 2)String or List"
+        raise Exception
     # If User_acceptable_country is stored as a string
     elif str_or_list == 0:
         for other_user in data_list:
@@ -103,9 +103,6 @@ def list_matched_country(value, data_list, id_or_name=1):
                 elif min(acceptable_age_list) <= int(other_user['Age']) <= max(acceptable_age_list):
                     # Match user's acceptable countries with other_user's country
                     if other_user['Country'] == country:
-                        # Appending matched other_user to the matched_users list
-                        matched_users.append(other_user[output_type])
-                    if user_acceptable_country_str == 'any':
                         # Appending matched other_user to the matched_users list
                         matched_users.append(other_user[output_type])
 
