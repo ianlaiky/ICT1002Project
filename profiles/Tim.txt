@@ -1,0 +1,12 @@
+Name: Tim
+Gender: M
+Country: Singapore
+Acceptable_country: Malaysia, Singapore
+Age: 18
+Acceptable_age_range: 18-26
+Likes: Swimming, Reading
+Dislikes: Basketball, Soccer
+Books: 
+Harry Potter and the Philosopher's Stone
+50 Shades of Grey
+Cinderella

@@ -1,0 +1,12 @@
+Name: Jenny
+Gender: F
+Country: United States of America
+Acceptable_country: Singapore, South Korea
+Age: 24
+Acceptable_age_range: 18-35
+Likes: Basketball, Tennis
+Dislikes: Soccer
+Books: 
+Harry Potter and the Chamber of Secrets
+50 Shades Darker
+White Death
