@@ -1,0 +1,13 @@
+Name: Park Bom 
+Gender: F
+Country: South Korea
+Acceptable_country: South Korea, United States of America
+Age: 34
+Acceptable_age_range: 29-36
+Likes: singing, dancing
+Dislikes: basketball, smoking, swimming 
+
+Books:
+Tears of Frost
+The Lass of the Empress
+The Bride's Illusion

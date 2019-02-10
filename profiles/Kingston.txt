@@ -1,0 +1,15 @@
+Name: Kingston 
+Gender: M
+Country: United States of America
+Acceptable_country: South Korea, United States of America
+Age: 35
+Acceptable_age_range: 29-36
+Likes: singing, dancing, reading
+Dislikes: basketball, smoking 
+
+Books:
+Tears of Frost
+The Lass of the Empress
+The Bride's Illusion
+A Tailor-made Bride
+Ruby in the Lady

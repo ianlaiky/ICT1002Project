@@ -1,0 +1,13 @@
+Name: Lucas 
+Gender: M
+Country: United States of America
+Acceptable_country: South Korea, China
+Age: 19
+Acceptable_age_range: 18-22
+Likes: movies, soccer, gardening
+Dislikes: basketball, reading, swimming 
+
+Books:
+The Vegetable Gardener's Bible
+How to Raise a Plant
+Planting: A New Perspective

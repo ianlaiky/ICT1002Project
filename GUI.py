@@ -6,6 +6,7 @@ Author: Toh Wei Hao Nicholas
 import sys
 import wx
 import os
+import threading
 from function1 import main as List_All_Details
 from function1 import run as Check
 from function2 import main as Country_Matches
@@ -14,6 +15,17 @@ from function4 import main as Books_Matches
 from function5 import main as Overall_Matches
 from function6Main import run as OutputCSV
 from CreateNew import main as Create_New_Profile
+
+
+class Thread(object):
+    def __init__(self):
+        thread = threading.Thread(target=self.run, args=())
+        thread.daemon = True  # Daemonize thread
+        thread.start()
+
+    def run(self):
+        OutputWindow()
+        List_All_Details(folder_path)
 
 
 class OutputWindow(wx.TextCtrl):
@@ -114,8 +126,7 @@ class MainFrame(wx.Frame):
 
     ''' List all Profiles '''
     def List_All_Details(self, event):
-        OutputWindow()
-        List_All_Details(folder_path)
+        Thread()
 
     ''' Lists all matches based on Acceptable Countries '''
     def Country_Matches(self, event):

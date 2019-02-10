@@ -1,0 +1,15 @@
+Name: Casandra 
+Gender: F
+Country: Singapore
+Acceptable_country: Singapore, China
+Age: 22
+Acceptable_age_range: 18-30
+Likes: movies, reading
+Dislikes: garlic, durain, swimming 
+
+Books:
+The Glimmering Bacteria Mystery
+The Cinnamon Aunt
+The Lawless Submarine
+The Combative Hall
+The Silent Wharf Mystery

@@ -1,0 +1,14 @@
+Name: Darryl 
+Gender: M
+Country: Taiwan
+Acceptable_country: Singapore, China
+Age: 32
+Acceptable_age_range: 18-35
+Likes: movies, reading, basketball
+Dislikes: pineapples, mango, swimming 
+
+Books:
+The Jinxed Gangster
+The Mysterious Fragment
+The Secret Of The Irish Storeroom
+The Sign Of The Smoldering Altar
