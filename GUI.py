@@ -6,7 +6,6 @@ Author: Toh Wei Hao Nicholas
 import sys
 import wx
 import os
-import threading
 from function1 import main as List_All_Details
 from function1 import run as Check
 from function2 import main as Country_Matches
@@ -15,17 +14,6 @@ from function4 import main as Books_Matches
 from function5 import main as Overall_Matches
 from function6Main import run as OutputCSV
 from CreateNew import main as Create_New_Profile
-
-
-class Thread(object):
-    def __init__(self):
-        thread = threading.Thread(target=self.run, args=())
-        thread.daemon = True  # Daemonize thread
-        thread.start()
-
-    def run(self):
-        OutputWindow()
-        List_All_Details(folder_path)
 
 
 class OutputWindow(wx.TextCtrl):
@@ -49,7 +37,7 @@ class AppPanel(wx.Panel):
         self.parent = parent
 
 
-class MainFrame(wx.Frame):
+class MainWindow(wx.Frame):
     """
     Class used for creating the main frame
     """
@@ -75,7 +63,7 @@ class MainFrame(wx.Frame):
         ExitButton = wx.Button(panel, label="Exit", pos=(210, 400), size=(80, 30))
 
         ''' Binding buttons to actions '''
-        self.Bind(wx.EVT_BUTTON, self.List_All_Details, Func1)
+        self.Bind(wx.EVT_BUTTON, self.List_All_Profiles, Func1)
         self.Bind(wx.EVT_BUTTON, self.Country_Matches, Func2)
         self.Bind(wx.EVT_BUTTON, self.Likes_Matches, Func3)
         self.Bind(wx.EVT_BUTTON, self.Books_Matches, Func4)
@@ -125,8 +113,9 @@ class MainFrame(wx.Frame):
         dlg.Destroy()
 
     ''' List all Profiles '''
-    def List_All_Details(self, event):
-        Thread()
+    def List_All_Profiles(self, event):
+        OutputWindow()
+        List_All_Details(folder_path)
 
     ''' Lists all matches based on Acceptable Countries '''
     def Country_Matches(self, event):
@@ -231,7 +220,7 @@ class MainFrame(wx.Frame):
 
 if __name__ == "__main__":
     MainApp = wx.App(False)
-    Mainframe = MainFrame(parent=None, id=-1)
-    Mainframe.Show()
+    MainWindow = MainWindow(parent=None, id=-1)
+    MainWindow.Show()
     MainApp.MainLoop()
     sys.stdout = sys.__stdout__

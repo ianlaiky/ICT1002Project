@@ -25,19 +25,17 @@ class RegFrame(wx.Frame):
         ''' Setting up New Profile Form '''
         self.NameLabel = wx.StaticText(self, wx.ID_ANY, label="Name:", pos=wx.DefaultPosition, size=wx.DefaultSize)
         self.NameLabel.Wrap(-1)
-
         Sizer.Add(self.NameLabel, 0, wx.ALL, 5)
 
-        self.NameField = wx.TextCtrl(self, wx.ID_ANY, value="", pos=wx.DefaultPosition, size=wx.Size(200, -1))
+        self.NameField = wx.TextCtrl(self, wx.ID_ANY, value="", pos=wx.DefaultPosition, size=wx.Size(300, -1))
         Sizer.Add(self.NameField, 0, wx.ALL, 5)
 
         self.GenderLabel = wx.StaticText(self, wx.ID_ANY, label="Gender:", pos=wx.DefaultPosition, size=wx.DefaultSize)
         self.GenderLabel.Wrap(-1)
-
         Sizer.Add(self.GenderLabel, 0, wx.ALL, 5)
 
         GenderFieldChoices = ["Male", "Female"]
-        self.GenderField = wx.RadioBox(self, wx.ID_ANY, label="Gender", pos=wx.Point(150, -1), size=wx.Size(150, -1),
+        self.GenderField = wx.RadioBox(self, wx.ID_ANY, label="Gender", pos=wx.Point(150, -1), size=wx.Size(200, -1),
                                        choices=GenderFieldChoices, majorDimension=1, style=wx.RA_SPECIFY_ROWS)
         self.GenderField.SetSelection(0)
         Sizer.Add(self.GenderField, 0, wx.ALL, 5)
@@ -45,7 +43,6 @@ class RegFrame(wx.Frame):
         self.CountryLabel = wx.StaticText(self, wx.ID_ANY, label="Your Country:", pos=wx.DefaultPosition,
                                           size=wx.DefaultSize)
         self.CountryLabel.Wrap(-1)
-
         Sizer.Add(self.CountryLabel, 0, wx.ALL, 5)
 
         global CountryFieldChoices
@@ -90,17 +87,15 @@ class RegFrame(wx.Frame):
                                "Wallis and Futuna", "Western Sahara", "Yemen", "Zambia", "Zimbabwe"]
 
         self.CountryField = wx.ComboBox(self, wx.ID_ANY, value="Select Country", pos=wx.DefaultPosition,
-                                        size=wx.Size(200, -1), choices=CountryFieldChoices, style=wx.CB_DROPDOWN)
-
+                                        size=wx.Size(300, -1), choices=CountryFieldChoices, style=wx.CB_DROPDOWN)
         Sizer.Add(self.CountryField, 0, wx.ALL, 5)
 
         self.AcceptableCountryLabel = wx.StaticText(self, wx.ID_ANY, label="Acceptable Countries:",
                                                     pos=wx.DefaultPosition, size=wx.DefaultSize)
         self.AcceptableCountryLabel.Wrap(-1)
-
         Sizer.Add(self.AcceptableCountryLabel, 0, wx.ALL, 5)
 
-        self.AcceptableCountryField = wx.ListBox(self, wx.ID_ANY, pos=wx.DefaultPosition, size=wx.Size(200, 100),
+        self.AcceptableCountryField = wx.ListBox(self, wx.ID_ANY, pos=wx.DefaultPosition, size=wx.Size(300, 100),
                                                  choices=CountryFieldChoices, style=wx.LB_ALWAYS_SB | wx.LB_HSCROLL |
                                                  wx.LB_MULTIPLE | wx.LB_SORT)
         self.AcceptableCountryField.SetToolTip("What country's men/women are you looking for?")
@@ -108,7 +103,6 @@ class RegFrame(wx.Frame):
 
         self.AgeLabel = wx.StaticText(self, wx.ID_ANY, label="Age:", pos=wx.DefaultPosition, size=wx.DefaultSize)
         self.AgeLabel.Wrap(-1)
-
         Sizer.Add(self.AgeLabel, 0, wx.ALL, 5)
 
         self.AgeField = wx.TextCtrl(self, wx.ID_ANY, value="18", pos=wx.DefaultPosition, size=wx.Size(30, -1))
@@ -119,7 +113,6 @@ class RegFrame(wx.Frame):
         self.AcceptableAgeRangeLabel = wx.StaticText(self, wx.ID_ANY, label="Acceptable Age Range:",
                                                      pos=wx.DefaultPosition, size=wx.DefaultSize)
         self.AcceptableAgeRangeLabel.Wrap(-1)
-
         Sizer.Add(self.AcceptableAgeRangeLabel, 0, wx.ALL, 5)
 
         self.AcceptableAgeRangeField = wx.TextCtrl(self, wx.ID_ANY, value="18-26", pos=wx.DefaultPosition,
@@ -130,41 +123,33 @@ class RegFrame(wx.Frame):
 
         self.LikesLabel = wx.StaticText(self, wx.ID_ANY, label="Likes:", pos=wx.DefaultPosition, size=wx.DefaultSize)
         self.LikesLabel.Wrap(-1)
-
         Sizer.Add(self.LikesLabel, 0, wx.ALL, 5)
 
-        self.LikesField = wx.TextCtrl(self, wx.ID_ANY, value="", pos=wx.DefaultPosition, size=wx.Size(200, -1),
+        self.LikesField = wx.TextCtrl(self, wx.ID_ANY, value="", pos=wx.DefaultPosition, size=wx.Size(300, -1),
                                       style=wx.TE_BESTWRAP)
         self.LikesField.SetToolTip("Let others know what do you like! Separate likes by a comma")
-
         Sizer.Add(self.LikesField, 0, wx.ALL, 5)
 
         self.DislikesLabel = wx.StaticText(self, wx.ID_ANY, label="Dislikes", pos=wx.DefaultPosition,
                                            size=wx.DefaultSize)
         Sizer.Add(self.DislikesLabel, 0, wx.ALL, 5)
 
-        self.DislikesField = wx.TextCtrl(self, wx.ID_ANY, value="", pos=wx.DefaultPosition, size=wx.Size(200, -1),
+        self.DislikesField = wx.TextCtrl(self, wx.ID_ANY, value="", pos=wx.DefaultPosition, size=wx.Size(300, -1),
                                          style=wx.TE_BESTWRAP)
         self.DislikesField.SetToolTip("Let others know what do you hate! Separate dislikes by a comma")
         Sizer.Add(self.DislikesField, 0, wx.ALL, 5)
 
         self.BooksLabel = wx.StaticText(self, wx.ID_ANY, label="Books:", pos=wx.DefaultPosition, size=wx.DefaultSize)
         self.BooksLabel.Wrap(-1)
-
         Sizer.Add(self.BooksLabel, 0, wx.ALL, 5)
 
-        self.BooksField = wx.TextCtrl(self, wx.ID_ANY, value="", pos=wx.DefaultPosition, size=wx.Size(200, -1),
+        self.BooksField = wx.TextCtrl(self, wx.ID_ANY, value="", pos=wx.DefaultPosition, size=wx.Size(300, -1),
                                       style=wx.TE_BESTWRAP | wx.TE_MULTILINE)
         self.BooksField.SetToolTip("What's your favourite books? Separate books by a blank line")
-
         Sizer.Add(self.BooksField, 0, wx.ALL, 5)
 
-        Sizer.Add((0, 0), 1, wx.EXPAND, 5)  #Adding spacer
-
-        SaveButton = wx.Button(self, wx.ID_ANY, label="SAVE", pos=wx.DefaultPosition, size=wx.DefaultSize)
-
+        SaveButton = wx.Button(self, wx.ID_ANY, label="SAVE", pos=(200, 420), size=wx.DefaultSize)
         SaveButton.SetBitmapPosition(wx.BOTTOM)
-        Sizer.Add(SaveButton, 0, wx.ALIGN_BOTTOM | wx.ALIGN_CENTER, 5)
 
         self.SetSizer(Sizer)
         self.Layout()

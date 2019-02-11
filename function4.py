@@ -194,11 +194,13 @@ def func4(name, input_list, OUTPUT_FLAG=0):
         wx.MessageBox("Error: No such user. Please try again!", "Error", wx.OK | wx.ICON_ERROR)
 
 
-def main(folder_path,name):
+def main(folder_path, name):
     # Get data dynamically based on the profiles listed from filepath
     sample_list = getData(folder_path)
     output_list = func4(name, sample_list)
-    if ValueError:
+    try:
+        output_list2 = ("\n".join(output_list))
+    except TypeError:
         pass
     else:
         print("Your Top 3 matches based on your favourite books: ")
