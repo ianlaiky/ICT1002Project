@@ -11,7 +11,7 @@ import time
 class RegFrame(wx.Frame):
 
     def __init__(self, parent, path):
-        wx.Frame.__init__(self, parent, title="Application Name", pos=wx.DefaultPosition, size=wx.Size(500, 500),
+        wx.Frame.__init__(self, parent, title="DaBao", pos=wx.DefaultPosition, size=wx.Size(500, 500),
                           style=wx.DEFAULT_FRAME_STYLE | wx.TAB_TRAVERSAL)
         self.parent = parent
         global folder_path

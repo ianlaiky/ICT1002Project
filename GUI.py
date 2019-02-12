@@ -21,7 +21,7 @@ class OutputWindow(wx.TextCtrl):
     Class used for creating the output window
     """
     def __init__(self):
-        frame2 = wx.Frame(None, -1, "Application Name - Output", size=(500, 500))
+        frame2 = wx.Frame(None, -1, "Dabao - Output", size=(500, 500))
         frame2.Show()
         self.parent = frame2
         wx.TextCtrl.__init__(self, self.parent, size=(485, 460), style=wx.TE_MULTILINE | wx.TE_READONLY | wx.HSCROLL)
@@ -42,7 +42,7 @@ class MainWindow(wx.Frame):
     Class used for creating the main frame
     """
     def __init__(self, parent, id):
-        wx.Frame.__init__(self, parent, id, title="Application Name", size=(500, 500))
+        wx.Frame.__init__(self, parent, id, title="DaBao", size=(500, 500))
         panel = AppPanel(self)
 
         self.folder_prompt()
@@ -76,7 +76,7 @@ class MainWindow(wx.Frame):
     ''' Prompts user to enter folder path '''
     def folder_prompt(self):
         while True:
-            folderPrompt = wx.TextEntryDialog(None, message="Enter folder path:", caption="Application Name",
+            folderPrompt = wx.TextEntryDialog(None, message="Enter folder path:", caption="DaBao",
                                               value="./profiles/")
 
             if folderPrompt.ShowModal() == wx.ID_OK:
@@ -120,7 +120,7 @@ class MainWindow(wx.Frame):
     ''' Lists all matches based on Acceptable Countries '''
     def Country_Matches(self, event):
         while True:
-            name_prompt = wx.TextEntryDialog(None, message="Enter your name:", caption="Application Name", value="")
+            name_prompt = wx.TextEntryDialog(None, message="Enter your name:", caption="DaBao", value="")
             if name_prompt.ShowModal() == wx.ID_OK:
                 global name
                 name = name_prompt.GetValue()
@@ -143,7 +143,7 @@ class MainWindow(wx.Frame):
     ''' Lists Top 3 matches based on Likes '''
     def Likes_Matches(self, event):
         while True:
-            name_prompt = wx.TextEntryDialog(None, message="Enter your name:", caption="Application Name", value="")
+            name_prompt = wx.TextEntryDialog(None, message="Enter your name:", caption="DaBao", value="")
             if name_prompt.ShowModal() == wx.ID_OK:
                 global name
                 name = name_prompt.GetValue()
@@ -159,7 +159,7 @@ class MainWindow(wx.Frame):
     ''' Lists Top 3 matches based on Books '''
     def Books_Matches(self, event):
         while True:
-            name_prompt = wx.TextEntryDialog(None, message="Enter your name:", caption="Application Name", value="")
+            name_prompt = wx.TextEntryDialog(None, message="Enter your name:", caption="DaBao", value="")
             if name_prompt.ShowModal() == wx.ID_OK:
                 global name
                 name = name_prompt.GetValue()
@@ -175,7 +175,7 @@ class MainWindow(wx.Frame):
     ''' Lists Top 3 matches based on Overall Profile '''
     def Overall_Matches(self, event):
         while True:
-            name_prompt = wx.TextEntryDialog(None, message="Enter your name:", caption="Application Name", value="")
+            name_prompt = wx.TextEntryDialog(None, message="Enter your name:", caption="DaBao", value="")
             if name_prompt.ShowModal() == wx.ID_OK:
                 global name
                 name = name_prompt.GetValue()
