@@ -90,6 +90,7 @@ def storingProfilesAsDict(bookIndex, cleanedTextList, currentProfileIndex):
         Data[1]: Raw data
         
         '''
+
         if "," in data[1]:
 
             '''
@@ -124,6 +125,18 @@ def storingProfilesAsDict(bookIndex, cleanedTextList, currentProfileIndex):
         elif str(data[0].lower()) == "Dislikes".lower():
             tempSaveList = [str(data[1]).strip().lower()]
             dictionary[data[0]] = tempSaveList
+
+            '''
+            Ignorning lowercase for this few
+            '''
+        elif str(data[0].lower()) == "Name".lower():
+
+            dictionary[data[0]] = str(data[1]).strip()
+
+        elif str(data[0].lower()) == "Gender".lower():
+
+            dictionary[data[0]] = str(data[1]).strip()
+
 
         else:
 
