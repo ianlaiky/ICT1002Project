@@ -189,16 +189,9 @@ class RegFrame(wx.Frame):
 
         acceptable_country_index = self.AcceptableCountryField.GetSelections()
         acceptable_country = []
-        while True:
-            for i in acceptable_country_index:
-                x = CountryFieldChoices[i]
-                acceptable_country.append(x)
-            if len(acceptable_country) == 0:
-                dlg = wx.MessageBox("Error: Please select at least 1 acceptable country", "Error", wx.OK | wx.ICON_ERROR)
-                if dlg == wx.OK:
-                    return
-            else:
-                break
+        for i in acceptable_country_index:
+            x = CountryFieldChoices[i]
+            acceptable_country.append(x)
 
         acceptable_country = ", ".join(acceptable_country)
 
