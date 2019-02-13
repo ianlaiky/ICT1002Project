@@ -100,7 +100,7 @@ def storingProfilesAsDict(bookIndex, cleanedTextList, currentProfileIndex):
 
             for ix in tempList:
                 if str(ix) != "":
-                    saveList.append(str(ix).strip())
+                    saveList.append(str(ix).strip().lower())
 
             '''
             Saving to Dictionary
@@ -114,20 +114,20 @@ def storingProfilesAsDict(bookIndex, cleanedTextList, currentProfileIndex):
             contain a single element aid compatibility '''
 
         elif str(data[0].lower()) == "Acceptable_country".lower():
-            tempSaveList = [str(data[1]).strip()]
+            tempSaveList = [str(data[1]).strip().lower()]
             dictionary[data[0]] = tempSaveList
 
         elif str(data[0].lower()) == "Likes".lower():
-            tempSaveList = [str(data[1]).strip()]
+            tempSaveList = [str(data[1]).strip().lower()]
             dictionary[data[0]] = tempSaveList
 
         elif str(data[0].lower()) == "Dislikes".lower():
-            tempSaveList = [str(data[1]).strip()]
+            tempSaveList = [str(data[1]).strip().lower()]
             dictionary[data[0]] = tempSaveList
 
         else:
 
-            dictionary[data[0]] = str(data[1]).strip()
+            dictionary[data[0]] = str(data[1]).strip().lower()
 
     '''
     Saving books data:
