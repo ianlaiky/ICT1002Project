@@ -77,7 +77,7 @@ def list_matched_country(value, data_list, id_or_name=1):
             # Ignore the selected user
             if data_list.index(other_user) == user_index:
                 continue
-            # Ignore the same sex
+            # Ignore the same gender
             elif other_user['Gender'] == user_gender:
                 continue
             # If other_user's age falls in between the acceptable age range of the selected user
@@ -86,9 +86,6 @@ def list_matched_country(value, data_list, id_or_name=1):
                 if other_user['Country'] == user_acceptable_country_str:
                     # Appending matched other_user to the matched_users list
                     matched_users.append(other_user[output_type])
-                # Match user to other_user of any country if user's acceptable country is 'any'
-                if user_acceptable_country_str == 'any':
-                    matched_users.append(other_user[output_type])
     # If User_acceptable_country is stored as a list
     elif str_or_list == 1:
         for country in user_acceptable_country_list:
@@ -96,7 +93,7 @@ def list_matched_country(value, data_list, id_or_name=1):
                 # Ignore the selected user
                 if data_list.index(other_user) == user_index:
                     continue
-                # Ignore the same sex
+                # Ignore the same gender
                 elif other_user['Gender'] == user_gender:
                     continue
                 # If other_user's age falls in between the acceptable age range of the selected user
